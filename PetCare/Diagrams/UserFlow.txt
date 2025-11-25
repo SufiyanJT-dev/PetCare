@@ -1,0 +1,5 @@
+[User Registers] → [Add Pets] → [Record Weight/Medical Events] → [Upload Attachments]
+       ↓
+ [Schedule Appointments] → [Set Reminders] → [Dashboard Overview]
+       ↓
+   [Ongoing Tracking & Notifications]

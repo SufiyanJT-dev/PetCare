@@ -1,0 +1,136 @@
++------------------+
+|      USERS       |
++------------------+
+| PK user_id       |
+| full_name        |
+| email (UNIQUE)   |
+| password_hash    |
+| phone            |
+| created_at       |
+| updated_at       |
++------------------+
+        |
+        v
++------------------+
+|      PETS        |
++------------------+
+| PK pet_id        |
+| FK owner_id → USERS.user_id
+| species_name     |   <-- stored directly here
+| name             |
+| breed            |
+| date_of_birth    |
+| gender ENUM (M/F/U)
+| is_neutered      |
+| neutered_date    |
+| microchip_number |
+| photo_url        |
+| is_active        |
+| created_at       |
+| updated_at       |
++------------------+
+        |
+        v
++------------------+
+| PET_WEIGHT_HISTORY|
++------------------+
+| PK weight_id      |
+| FK pet_id → PETS  |
+| weight            |
+| unit              |
+| recorded_at       |
++------------------+
+
+        |
+        v
++------------------+
+| MEDICAL_EVENTS   |
++------------------+
+| PK event_id      |
+| FK pet_id → PETS |
+| FK appointment_id (nullable)
+| event_type ENUM  |
+| event_date       |
+| vet_name         |
+| diagnosis        |
+| treatment        |
+| notes            |
+| created_at       |
+| updated_at       |
++------------------+
+   |       |       |
+   v       v       v
++------------------+   +------------------+   +------------------+
+| VACCINATIONS     |   | MEDICATIONS      |   | VET_VISITS       |
++------------------+   +------------------+   +------------------+
+| PK vaccination_id|   | PK medication_id |   | PK visit_id      |
+| FK event_id      |   | FK event_id      |   | FK event_id      |
+| vaccine_name     |   | medication_name  |   | diagnosis        |
+| batch_number     |   | dosage           |   +------------------+
+| next_due_date    |   | frequency ENUM   |
++------------------+   | start_date       |
+                       | end_date         |
+                       | times_of_day JSON|
+                       | instructions     |
+                       | is_active        |
+                       +------------------+
+
+        |
+        v
++------------------+
+|  APPOINTMENTS    |
++------------------+
+| PK appointment_id|
+| FK pet_id → PETS |
+| scheduled_date   |
+| purpose          |
+| status ENUM      |
+| veterinarian     |
+| clinic_name      |
+| clinic_address   |
+| clinic_phone     |
+| notes            |
+| created_at       |
+| updated_at       |
++------------------+
+
+        |
+        v
++------------------+
+|   REMINDERS      |   <-- unified table
++------------------+
+| PK reminder_id   |
+| FK pet_id → PETS |
+| FK appointment_id (nullable)
+| FK event_id (nullable)
+| reminder_time    |
+| reminder_type ENUM ('email','sms','push')
+| status ENUM ('pending','sent','failed')
+| sent_at          |
+| created_at       |
++------------------+
+
+        |
+        v
++------------------+
+|   ATTACHMENTS    |
++------------------+
+| PK attachment_id |
+| FK pet_id (nullable)
+| FK event_id (nullable)
+| file_url         |
+| file_type        |
+| file_size        |
+| uploaded_at      |
++------------------+
+
++------------------+
+| PET_DOCUMENTS    |
++------------------+
+| PK document_id   |
+| FK pet_id → PETS |
+| document_type ENUM
+| title            |
+| file_url         |
+| uploaded_at      |
++------------------+
