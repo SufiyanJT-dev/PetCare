@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PetCareManagement.Application.Auth.Query
 {
-    public class ValidateUserQuery: IRequest<ActionResult<AuthResult>>
+    public class ValidateUserQuery: IRequest<AuthResult>
     {
         public string Email { get; set; }
         public string Password { get; set; }
