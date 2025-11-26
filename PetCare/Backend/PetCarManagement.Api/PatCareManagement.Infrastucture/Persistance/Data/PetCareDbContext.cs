@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PatCareManagement.Domain.Entity;
+
 using PetCareManagement.Domain.Entity;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,15 +18,15 @@ namespace PatCareManagement.Infrastucture.Persistance.Data
             optionsBuilder.UseSqlServer(@"Server=localhost;Database=PetCareDb;User Id=sa;Password=Sufiyan@123;TrustServerCertificate=True;");
 
         }
-        DbSet<Domain.Entity.User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public DbSet<Pets> Pets { get; set; }
         public DbSet<WeightHistory> WeightHistories { get; set; }
         public DbSet<MedicalEvent> MedicalEvents { get; set; }
-        public DbSet<Appointment> Appointments { get; set; }
-        public DbSet<Documents> Documents { get; set; }
+       public DbSet<RefreshToken> _refreshTokens { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
-
+        public DbSet<EventAttachment> eventAttachments  { get; set; }
+        public  DbSet<Attachment> Attachments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

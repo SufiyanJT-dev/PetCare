@@ -1,19 +1,53 @@
-﻿using System;
+﻿using PetCareManagement.Domain.Enum;
+using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace PetCareManagement.Domain.Entity
 {
     public class MedicalEvent
     {
-        public Guid Id { get; set; }
-        public Guid PetId { get; set; }
+        [Key]
+        public int EventId { get; private set; }
 
-        public string EventType { get; set; }
-        public DateTime EventDate { get; set; }
-        public string VetName { get; set; }
-        public string Clinic { get; set; }
-        public string Notes { get; set; }
+        [Required]
+        public int PetId { get; private set; }
 
-        // Navigation
-        public Pets Pet { get; set; }
+        public DateTime Date { get; private set; }
+
+        [Required]
+        public MedicalEventType Type { get; private set; }
+
+        public string? VetName { get; private set; }
+
+        public string? Notes { get; private set; }
+
+        public DateTime? NextFollowupDate { get; private set; }
+
+     
+        public Pets? Pet { get; private set; }
+
+        private readonly List<EventAttachment> _attachments = new();
+        public IReadOnlyCollection<EventAttachment> Attachments => _attachments.AsReadOnly();
+
+     private MedicalEvent() { }
+
+        public MedicalEvent(int petId, DateTime date, MedicalEventType type, string? vetName, string? notes, DateTime? nextFollowup)
+        {
+            
+            PetId = petId;
+            Date = date;
+            Type = type;
+            VetName = vetName;
+            Notes = notes;
+            NextFollowupDate = nextFollowup;
+        }
+
+        public void AddAttachment(EventAttachment link)
+        {
+            _attachments.Add(link);
+        }
     }
+
 }
