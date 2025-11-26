@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace PetCareManagement.Application.IRepository
 {
-    public interface IGenericRepo<T> where T : class
+    public interface ITokenService
     {
-   
-        Task<T?> AddAsync(T entity);
-      
-      
 
+        string CreateAccessToken(Domain.Entity.User user, out DateTime expiresAt);
+        string CreateRefreshToken(out DateTime expiresAt);
     }
 }
