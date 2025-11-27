@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PatCareManagement.Infrastucture.Persistance.Data;
 
@@ -11,9 +12,11 @@ using PatCareManagement.Infrastucture.Persistance.Data;
 namespace PetCareManagement.Infrastucture.Migrations
 {
     [DbContext(typeof(PetCareDbContext))]
-    partial class PetCareDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251127101714_active")]
+    partial class active
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

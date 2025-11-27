@@ -11,11 +11,11 @@ namespace PetCareManagement.Application.User.command
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        private readonly IGenericRepo<Domain.Entity.User> genericRepo;
+        private readonly IUserRepository<Domain.Entity.User> userRepository;
         private readonly IPasswordHasher<Domain.Entity.User> _passwordHasher;
-        public CreateUserCommandHandler(IGenericRepo<Domain.Entity.User> genericRepo, IPasswordHasher<Domain.Entity.User> passwordHasher)
+        public CreateUserCommandHandler(IUserRepository<Domain.Entity.User> userRepository, IPasswordHasher<Domain.Entity.User> passwordHasher)
         {
-            this.genericRepo = genericRepo;
+            this.userRepository = userRepository;
             this._passwordHasher = passwordHasher;
         }
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -23,14 +23,14 @@ namespace PetCareManagement.Application.User.command
           
             Domain.Entity.User user = new Domain.Entity.User
             (
-                name: request.Fullname,
+            name: request.Fullname,
             email: request.Email,
             phoneNumber: request.PhoneNumber
             
             );
             var hashedPassword = _passwordHasher.HashPassword(user, request.Password);
             user.SetPasswordHash(hashedPassword);
-            await genericRepo.AddAsync(user);
+            await userRepository.AddAsync(user);
             return  user.UserId;
         }
     }

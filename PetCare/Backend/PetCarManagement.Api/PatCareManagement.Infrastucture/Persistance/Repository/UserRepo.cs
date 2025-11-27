@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace PetCareManagement.Infrastucture.Persistance.Repository
 {
-    public class UserRepo : IGenericRepo<User>
+    public class UserRepo : IUserRepository<User>
     {
         private readonly PetCareDbContext dbContext;
 
@@ -22,6 +22,16 @@ namespace PetCareManagement.Infrastucture.Persistance.Repository
             await dbContext.AddAsync(entity);
             await dbContext.SaveChangesAsync();
             return entity;
+        }
+
+        public Task<User?> GetByIdAsync(int id)
+        {
+            User? user = dbContext.Users.FirstOrDefault(u => u.UserId == id );
+            if (user != null)
+            {
+                return Task.FromResult<User?>(user);
+            }
+            return Task.FromResult<User?>(null);
         }
     }
 }
