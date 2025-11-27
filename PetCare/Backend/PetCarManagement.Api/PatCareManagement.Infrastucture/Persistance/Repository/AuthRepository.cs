@@ -41,6 +41,11 @@ namespace PetCareManagement.Infrastucture.Persistance.Repository
             _db.Users.Update(user);
             await _db.SaveChangesAsync(ct);
         }
+
+        public Task<User?> FindByIdAsync(int userId, CancellationToken ct = default)
+        {
+            return _db.Users.SingleOrDefaultAsync(u => u.UserId == userId, ct);
+        }
     }
    
   

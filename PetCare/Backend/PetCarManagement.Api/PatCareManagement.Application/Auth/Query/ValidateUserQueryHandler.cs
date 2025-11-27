@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PetCareManagement.Application.Auth.Query
 {
-    public class ValidateUserQueryHandler : IRequestHandler<ValidateUserQuery, ActionResult<AuthResult>>
+    public class ValidateUserQueryHandler : IRequestHandler<ValidateUserQuery, AuthResult>
     {
         private readonly IAuth _auth;
         private readonly IPasswordHasher<Domain.Entity.User> _passwordHasher;
@@ -25,16 +25,16 @@ namespace PetCareManagement.Application.Auth.Query
             _tokenService = tokenService;
         }
 
-        public async Task<ActionResult<AuthResult>> Handle(ValidateUserQuery request, CancellationToken cancellationToken)
+        public async Task<AuthResult> Handle(ValidateUserQuery request, CancellationToken cancellationToken)
         {
             if (string.IsNullOrWhiteSpace(request.Email) || string.IsNullOrWhiteSpace(request.Password))
-                return new BadRequestObjectResult("Email and password are required.");
+                throw new ArgumentException("Email and password are required.");
 
             var user = await _auth.FindByEmailAsync(request.Email, cancellationToken);
-            if (user == null) return new NotFoundObjectResult("User not found.");
+            if (user == null) throw new KeyNotFoundException("User not found.");
 
             var verifyResult = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
-            if (verifyResult == PasswordVerificationResult.Failed) return new UnauthorizedResult();
+            if (verifyResult == PasswordVerificationResult.Failed) throw new UnauthorizedAccessException("Invalid credentials.");
 
             if (verifyResult == PasswordVerificationResult.SuccessRehashNeeded)
             {
@@ -49,15 +49,15 @@ namespace PetCareManagement.Application.Auth.Query
             var refreshTokenEntity = new RefreshToken(user.UserId, refreshToken, refreshExpiresAt);
             await _auth.SaveRefreshTokenAsync(refreshTokenEntity, cancellationToken);
 
-            var result = new AuthResult
+         
+
+            return  new AuthResult
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken,
                 AccessTokenExpiresAt = accessExpiresAt,
                 RefreshTokenExpiresAt = refreshExpiresAt
             };
-
-            return new OkObjectResult(result);
         }
     }
 
