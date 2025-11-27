@@ -30,9 +30,9 @@ namespace PetCareManagement.Domain.Entity
 
         public DateTime? DateOfBirth { get; private set; }
 
+        public bool IsActive { get; private set; } 
 
-
-        public decimal? CurrentWeightKg { get; private set; }
+        
 
        
    
@@ -50,19 +50,21 @@ namespace PetCareManagement.Domain.Entity
         private readonly List<Reminder> _reminders = new();
         public IReadOnlyCollection<Reminder> Reminders => _reminders.AsReadOnly();
 
-        
+        private Pets() { }
 
-        public Pets(int userId, string name, Species species)
+        public Pets(int userId, string name, Species species, string breed, DateTime dateOfBirth)
         {
-            
             UserId = userId;
             Name = name;
             Species = species;
-            CreatedAt  = DateTime.UtcNow;
-            
+            CreatedAt = DateTime.UtcNow;
+            Breed = breed;
+            DateOfBirth = dateOfBirth;           
+            IsActive = true;
         }
 
-        public void UpdateProfile(string name, Species species, string? breed, DateTime? dob, string? microchipId, bool isPrivate)
+
+        public void UpdateProfile(string name, Species species, string? breed, DateTime? dob)
         {
             Name = name;
             Species = species;
@@ -70,13 +72,15 @@ namespace PetCareManagement.Domain.Entity
             DateOfBirth = dob;
          
         }
-
-        public void SetCurrentWeight(decimal weightKg)
+        public void Deactivate()
         {
-            if (weightKg <= 0) throw new ArgumentOutOfRangeException(nameof(weightKg));
-            CurrentWeightKg = weightKg;
-          
+            IsActive = false;
         }
+       public int GetAge()
+        {
+           return DateOfBirth.HasValue ? DateTime.Now.Year - DateOfBirth.Value.Year : 0;
+        }
+      
 
         public void AddMedicalEvent(MedicalEvent ev)
         {

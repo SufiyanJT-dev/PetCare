@@ -29,14 +29,13 @@ namespace PetCareManagement.Domain.Entity
             [Required]
             public DateTime CreatedAt { get; private set; }
 
-            // Navigation properties
             public IReadOnlyCollection<Pets> Pets => _pets.AsReadOnly();
             private readonly List<Pets> _pets = new();
 
             public IReadOnlyCollection<RefreshToken> RefreshTokens => _refreshTokens.AsReadOnly();
             private readonly List<RefreshToken> _refreshTokens = new();
 
-            private User() { } // EF Core constructor
+            private User() { } 
 
             public User(string email, string name, string phoneNumber)
             {
