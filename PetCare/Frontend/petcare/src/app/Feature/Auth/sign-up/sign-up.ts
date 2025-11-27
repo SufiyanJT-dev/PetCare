@@ -31,10 +31,10 @@ export class SignUp {
   }
 
   submit() {
-    // remove confirmPassword before submission
+    
     if (this.signUpForm.valid) {
       console.log('Form Value:', this.signUpForm.value);
-      // Call your registration service here
+     
     } else {
       console.log('Form Invalid');
        this.signUpForm.markAllAsTouched(); // show errors for all fields
