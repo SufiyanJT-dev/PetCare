@@ -55,7 +55,7 @@ if (!string.IsNullOrEmpty(jwtKey))
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalSwagger", policy =>
-        policy.WithOrigins("https://localhost:7121", "https://localhost:4200","https://localhost:5001")
+        policy.WithOrigins("http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());

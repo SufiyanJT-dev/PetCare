@@ -27,9 +27,9 @@
     <div *ngIf="signUpForm.get('email')?.errors?.['email']">Email is invalid</div>  <!-- changed text -->
   </div>
   <div data-mdb-input-init class="form-outline mb-4">
-    <input type="tel" formControlName="phoneNo" placeholder="Phone Number" id="phone-no" class="form-control form-control-lg" />
+    <input type="tel" formControlName="phoneNumber" placeholder="Phone Number" id="phone-no" class="form-control form-control-lg" />
     <label class="form-label" for="phone-no">Phone no</label>
-    <div *ngIf="isInvalid('phoneNo')" class="text-danger mt-1">
+    <div *ngIf="isInvalid('phoneNumber')" class="text-danger mt-1">
     Phone number is required
   </div>
   </div>
@@ -37,6 +37,9 @@
   <div data-mdb-input-init class="form-outline mb-4">
     <input type="password" formControlName="password" placeholder="Password" id="password" class="form-control form-control-lg" />
     <label class="form-label" for="password">Password</label>
+    <div *ngIf="isInvalid('password')"  class="text-danger mt-1">
+      Must Have Atleast 6 charcters
+    </div>
   </div>
 
   <div data-mdb-input-init class="form-outline mb-4">
@@ -67,4 +70,5 @@
       </div>
     </div>
   </div>
+
 </section>
