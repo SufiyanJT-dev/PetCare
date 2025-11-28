@@ -1,0 +1,63 @@
+/* Background gradients */
+.gradient-custom-3 {
+  background: linear-gradient(to right, rgba(132, 250, 176, 0.5), rgba(143, 211, 244, 0.5));
+}
+.gradient-custom-4 {
+  background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1));
+}
+
+/* Glassmorphism card */
+.glass-card {
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  animation: fadeInUp 0.8s ease;
+}
+
+/* Input fields */
+.form-control {
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  transition: all 0.3s ease;
+}
+.form-control:focus {
+  border-color: #84fab0;
+  box-shadow: 0 0 8px rgba(132, 250, 176, 0.6);
+}
+
+/* Button */
+.btn {
+  border-radius: 50px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: linear-gradient(to right, #6dd5ed, #2193b0);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Typography */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+h2 {
+  font-weight: 600;
+  color: #2193b0;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.small-card {
+  max-width: 360px;   /* restricts card width */
+  margin: 60px auto;  /* adds spacing so it doesn’t fill screen */
+}
+
+.card-body {
+  padding: 1.5rem !important; /* smaller padding */
+}
