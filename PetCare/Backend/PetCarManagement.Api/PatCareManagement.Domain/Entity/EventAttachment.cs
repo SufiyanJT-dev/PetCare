@@ -22,8 +22,8 @@ namespace PetCareManagement.Domain.Entity
         public MedicalEvent? MedicalEvent { get; private set; }
         public Attachment? Attachment { get; private set; }
 
-     
 
+        private EventAttachment() { }
         public EventAttachment(int eventId, int attachId)
         {
             

@@ -4,6 +4,7 @@ using PetCareManagement.Application.IRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,11 @@ namespace PetCareManagement.Infrastucture.Persistance.Repository
             _db.Remove(entity);
             await _context.SaveChangesAsync();
             return true;
+        }
+
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _db.Where(predicate).ToListAsync();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()

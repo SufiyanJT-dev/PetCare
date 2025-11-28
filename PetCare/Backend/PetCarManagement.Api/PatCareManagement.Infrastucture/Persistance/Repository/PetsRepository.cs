@@ -6,6 +6,7 @@ using PetCareManagement.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,11 @@ namespace PetCareManagement.Infrastucture.Persistance.Repository
                 return Task.FromResult(true);
             }
             return Task.FromResult(false);
+        }
+
+        public Task<IEnumerable<Pets>> FindAsync(Expression<Func<Pets, bool>> predicate)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<IEnumerable<Pets>> GetAllAsync()

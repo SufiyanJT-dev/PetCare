@@ -9,6 +9,6 @@ namespace PetCareManagement.Application.WeightHistory.Command.DeleteWeightHistor
 {
     public class DeleteWeightHistoryCommand: IRequest<bool>
     {
-        public int WeightHistoryId { get; set; }
+        public int WhId { get; set; }
     }
 }
