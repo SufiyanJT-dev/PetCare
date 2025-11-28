@@ -13,7 +13,6 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Register validators for DI (do NOT enable automatic MVC validation)
 builder.Services.AddValidatorsFromAssembly(Assembly.Load("PetCareManagement.Application"));
 
 // Register MediatR and the validation behavior
@@ -23,7 +22,6 @@ builder.Services.AddMediatR(cfg =>
     cfg.AddOpenBehavior(typeof(PetCareManagement.Application.Behaviors.ValidationBehavior<,>));
 });
 
-// DbContext (configure provider/connection string in real app)
 builder.Services.AddDbContext<PetCareDbContext>();
 
 builder.Services.AddScoped<IUserRepository<User>, UserRepo>();
@@ -33,7 +31,7 @@ builder.Services.AddScoped<IAuth, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
-// JWT auth (optional)
+builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
 var jwtKey = builder.Configuration["Jwt:Key"];
 if (!string.IsNullOrEmpty(jwtKey))
 {
@@ -61,7 +59,7 @@ if (!string.IsNullOrEmpty(jwtKey))
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowLocalSwagger", policy =>
-        policy.WithOrigins("https://localhost:7121", "https://localhost:5001")
+        policy.WithOrigins("http://localhost:4200")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials());
@@ -73,7 +71,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Exception middleware must be registered early so it can catch exceptions from controllers and MediatR pipeline
 
 app.UseCors("AllowLocalSwagger");
 
@@ -84,7 +81,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Standard pipeline ordering
+
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();

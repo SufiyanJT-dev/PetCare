@@ -123,9 +123,6 @@ namespace PetCareManagement.Infrastucture.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<decimal?>("CurrentWeightKg")
-                        .HasColumnType("decimal(18,2)");
-
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");
 

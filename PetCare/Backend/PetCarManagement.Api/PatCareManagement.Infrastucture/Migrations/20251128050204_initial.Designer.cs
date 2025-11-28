@@ -12,8 +12,8 @@ using PatCareManagement.Infrastucture.Persistance.Data;
 namespace PetCareManagement.Infrastucture.Migrations
 {
     [DbContext(typeof(PetCareDbContext))]
-    [Migration("20251127101714_active")]
-    partial class active
+    [Migration("20251128050204_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -125,9 +125,6 @@ namespace PetCareManagement.Infrastucture.Migrations
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<decimal?>("CurrentWeightKg")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<DateTime?>("DateOfBirth")
                         .HasColumnType("datetime2");

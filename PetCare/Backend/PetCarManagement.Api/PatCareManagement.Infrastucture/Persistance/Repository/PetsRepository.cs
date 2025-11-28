@@ -59,6 +59,11 @@ namespace PetCareManagement.Infrastucture.Persistance.Repository
             return pet;
         }
 
+        public Task<bool> SaveChangesAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Pets?> UpdateAsync(Pets entity)
         {
             Domain.Entity.Pets? existingPet = await petCareDbContext.Pets
