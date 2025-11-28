@@ -17,16 +17,18 @@ namespace PetCareManagement.Domain.Entity
         [Column(TypeName = "decimal(6,2)")]
         public decimal WeightKg { get; private set; }
 
-    
+
 
         public WeightHistory(int petId, DateTime date, decimal weightKg)
         {
-            if (weightKg <= 0) throw new ArgumentOutOfRangeException(nameof(weightKg));
-            WhId = WhId;
-            PetId = PetId;
-            Date = Date;
-            WeightKg = WeightKg;
+            if (weightKg <= 0)
+                throw new ArgumentOutOfRangeException(nameof(weightKg));
+
+            PetId = petId;
+            Date = date;
+            WeightKg = weightKg;
         }
+
     }
 
 

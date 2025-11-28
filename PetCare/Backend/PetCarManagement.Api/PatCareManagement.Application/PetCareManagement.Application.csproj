@@ -20,6 +20,9 @@
   <ItemGroup>
     <Folder Include="User\Dtos\" />
     <Folder Include="User\Query\" />
+    <Folder Include="WeightHistory\Command\UpdateWeightHistory\" />
+    <Folder Include="WeightHistory\Query\GetAllWeightHistory\" />
+    <Folder Include="WeightHistory\Query\GetWeightHistoryById\" />
   </ItemGroup>
 
 </Project>
