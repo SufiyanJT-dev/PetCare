@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>{{ isEditMode ? 'Edit Pet' : 'Add New Pet' }}</h1>
+
+<form [formGroup]="petForm">
+  <div mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+  <mat-label>Pet Name</mat-label>
+  <input matInput formControlName="name">
+  <mat-error *ngIf="petForm.get('name')?.hasError('required') && petForm.get('name')?.touched">
+
+  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Species</mat-label>
+  <input matInput formControlName="species">
+  <mat-error *ngIf="petForm.get('species')?.hasError('required') && petForm.get('species')?.touched">
+   
+  </mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="outline" class="full-width">
+  <mat-label>Date of Birth</mat-label>
+  <input matInput type="date" formControlName="dob">
+  <mat-error *ngIf="petForm.get('dob')?.hasError('required') && petForm.get('dob')?.touched">
+    
+  </mat-error>
+  <mat-error *ngIf="petForm.get('dob')?.hasError('maxDate') && petForm.get('dob')?.touched">
+  
+  </mat-error>
+</mat-form-field>
+
+  </div>
+
+  <div mat-dialog-actions align="end">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="petForm.invalid">
+      Save
+    </button>
+  </div>
+</form>

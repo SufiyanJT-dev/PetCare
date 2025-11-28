@@ -1,0 +1,48 @@
+
+<button mat-raised-button color="primary" (click)="openDialog()">+ Add Pets</button>
+
+<div class="pets-container">
+
+  <mat-card class="pet-card" *ngFor="let pet of petsDetails()">
+
+    <img mat-card-image src="assets/pet-avatar.png" alt="Pet avatar">
+
+    <mat-card-content>
+
+      <h2 class="pet-name">{{ pet.name }}</h2>
+
+      <p class="pet-species">
+        Species:
+        {{ pet.species === 1 ? 'Dog' : pet.species === 2 ? 'Cat' : 'Other' }}
+      </p>
+
+      <p class="pet-breed">
+        Breed: {{ pet.breed }}
+      </p>
+
+      <p class="pet-age">
+        Age: {{ pet.age }} years
+      </p>
+
+      <p class="pet-dob">
+        DOB: {{ pet.dateOfBirth | date:'dd/MM/yyyy' }}
+      </p>
+
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-icon-button color="primary" (click)="onEditPet(pet)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="onDeletePet(pet)">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button mat-stroked-button color="primary" (click)="gotoViewAllMedicalEvents(pet.petId)">Medical Events</button>
+      <button mat-stroked-button color="primary"(click)="gotoViewAllDocuments(pet.petId)">View All Documents</button>
+      <button mat-stroked-button color="primary" (click)="gotoViewAllReminder(pet.petId)">Reminders</button>
+       <button mat-stroked-button color="primary" (click)="healthStatic(pet.petId)">Health Statistics</button>
+    </mat-card-actions>
+
+  </mat-card>
+</div>
+<router-outlet></router-outlet>
