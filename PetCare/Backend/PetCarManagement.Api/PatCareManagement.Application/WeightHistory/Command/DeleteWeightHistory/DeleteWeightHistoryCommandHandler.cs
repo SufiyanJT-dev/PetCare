@@ -18,12 +18,13 @@ namespace PetCareManagement.Application.WeightHistory.Command.DeleteWeightHistor
         }
         public async Task<bool> Handle(DeleteWeightHistoryCommand request, CancellationToken cancellationToken)
         {
-            var WeightHistory = _repo.GetByIdAsync(request.WeightHistoryId).Result;
+            var WeightHistory = _repo.GetByIdAsync(request.WhId).Result;
             if (WeightHistory == null)
             {
                 return false;
             }
            await _repo.DeleteAsync(WeightHistory.WhId);
+            await _repo.SaveChangesAsync();
             return true;
         }
     }

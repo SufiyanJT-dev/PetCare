@@ -30,6 +30,8 @@ builder.Services.AddScoped<IPetRepository, PetsRepository>();
 builder.Services.AddScoped<IAuth, AuthRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
+builder.Services.AddScoped(typeof(IGenericRepo<>), typeof(GenericRepo<>));
 var jwtKey = builder.Configuration["Jwt:Key"];
 if (!string.IsNullOrEmpty(jwtKey))
 {
