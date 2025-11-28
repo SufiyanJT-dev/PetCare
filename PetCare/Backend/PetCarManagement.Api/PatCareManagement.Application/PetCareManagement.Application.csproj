@@ -7,11 +7,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="12.1.0" />
     <PackageReference Include="MediatR" Version="13.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="10.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PatCareManagement.Domain\PetCareManagement.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="User\Dtos\" />
+    <Folder Include="User\Query\" />
+    <Folder Include="WeightHistory\Command\UpdateWeightHistory\" />
+    <Folder Include="WeightHistory\Query\GetAllWeightHistory\" />
+    <Folder Include="WeightHistory\Query\GetWeightHistoryById\" />
   </ItemGroup>
 
 </Project>

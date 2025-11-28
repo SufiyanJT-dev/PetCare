@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PatCareManagement.Domain.Entity;
+using PatCareManagement.Infrastucture.Persistance.Data;
 using PetCareManagement.Application.IRepository;
+using PetCareManagement.Domain.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,28 @@ using System.Threading.Tasks;
 
 namespace PetCareManagement.Infrastucture.Persistance.Repository
 {
-    public class UserRepo : IGenericRepo<User>
+    public class UserRepo : IUserRepository<User>
     {
-        private readonly DbContext dbContext;
+        private readonly PetCareDbContext dbContext;
 
-        public UserRepo(DbContext dbContext) {
+        public UserRepo(PetCareDbContext dbContext) {
             this.dbContext = dbContext;
         }
-        public Task<User> AddAsync(User entity)
+        public async Task<User> AddAsync(User entity)
         {
-            dbContext.Add(entity);
-            return  Task.FromResult(entity);
+            await dbContext.AddAsync(entity);
+            await dbContext.SaveChangesAsync();
+            return entity;
+        }
+
+        public Task<User?> GetByIdAsync(int id)
+        {
+            User? user = dbContext.Users.FirstOrDefault(u => u.UserId == id );
+            if (user != null)
+            {
+                return Task.FromResult<User?>(user);
+            }
+            return Task.FromResult<User?>(null);
         }
     }
 }

@@ -1,6 +1,9 @@
-﻿using PatCareManagement.Domain.Entity;
+﻿
+using PetCareManagement.Domain.Enum;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Reflection.Metadata;
 using System.Text;
@@ -8,29 +11,92 @@ using System.Threading.Tasks;
 
 namespace PetCareManagement.Domain.Entity
 {
+
     public class Pets
     {
-        public Guid Id { get; set; }
+        [Key]
+        public int PetId { get; private set; }
 
-        public Guid OwnerId { get; set; }
-        public string SpeciesName { get; set; }
-        public string Name { get; set; }
-        public string Gender { get; set; }
-        public string Breed { get; set; }
-        public DateTime? DateOfBirth { get; set; }
-        public int? CurrentWeightGrams { get; set; }
-        public bool? IsActive { get; set; }
-        public string PhotoUrl { get; set; }
-        public DateTime CreatedAt { get; set; }
+        [Required]
+        public int UserId { get; private set; } 
 
+        [Required]
+        public string Name { get; private set; }
+
+        [Required]
+        public Species Species { get; private set; }
+
+        public string? Breed { get; private set; }
+
+        public DateTime? DateOfBirth { get; private set; }
+
+        public bool IsActive { get; private set; } 
+
+        
+
+       
    
-        public User Owner { get; set; }
-        public ICollection<WeightHistory> WeightHistories { get; set; }
-        public ICollection<MedicalEvent> MedicalEvents { get; set; }
-        public ICollection<Appointment> Appointments { get; set; }
-        public ICollection<Documents> Documents { get; set; }
-        public ICollection<Reminder> Reminders { get; set; }
+        public DateTime CreatedAt { get; private set; }
 
 
+       
+        public User? Owner { get; private set; }
+        private readonly List<MedicalEvent> _medicalEvents = new();
+        public IReadOnlyCollection<MedicalEvent> MedicalEvents => _medicalEvents.AsReadOnly();
+
+        private readonly List<WeightHistory> _weightHistory = new();
+        public IReadOnlyCollection<WeightHistory> WeightHistory => _weightHistory.AsReadOnly();
+
+        private readonly List<Reminder> _reminders = new();
+        public IReadOnlyCollection<Reminder> Reminders => _reminders.AsReadOnly();
+
+        private Pets() { }
+
+        public Pets(int userId, string name, Species species, string breed, DateTime dateOfBirth)
+        {
+            UserId = userId;
+            Name = name;
+            Species = species;
+            CreatedAt = DateTime.UtcNow;
+            Breed = breed;
+            DateOfBirth = dateOfBirth;           
+            IsActive = true;
+        }
+
+
+        public void UpdateProfile(string name, Species species, string? breed, DateTime? dob)
+        {
+            Name = name;
+            Species = species;
+            Breed = breed;
+            DateOfBirth = dob;
+         
+        }
+        public void Deactivate()
+        {
+            IsActive = false;
+        }
+       public int GetAge()
+        {
+           return DateOfBirth.HasValue ? DateTime.Now.Year - DateOfBirth.Value.Year : 0;
+        }
+      
+
+        public void AddMedicalEvent(MedicalEvent ev)
+        {
+            _medicalEvents.Add(ev);
+        }
+
+        public void AddWeightHistory(WeightHistory wh)
+        {
+            _weightHistory.Add(wh);
+        }
+
+        public void AddReminder(Reminder r)
+        {
+            _reminders.Add(r);
+        }
     }
+
+
 }

@@ -20,8 +20,4 @@
     <ProjectReference Include="..\PatCareManagement.Domain\PetCareManagement.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Persistance\Unitofwork\" />
-  </ItemGroup>
-
 </Project>
