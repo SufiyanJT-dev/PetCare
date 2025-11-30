@@ -9,7 +9,7 @@ namespace PetCareManagement.Domain.Entity
     public class MedicalEvent
     {
         [Key]
-        public int EventId { get; private set; }
+        public int Id { get; private set; }
 
         [Required]
         public int PetId { get; private set; }
@@ -36,6 +36,16 @@ namespace PetCareManagement.Domain.Entity
         public MedicalEvent(int petId, DateTime date, MedicalEventType type, string? vetName, string? notes, DateTime? nextFollowup)
         {
             
+            PetId = petId;
+            Date = date;
+            Type = type;
+            VetName = vetName;
+            Notes = notes;
+            NextFollowupDate = nextFollowup;
+        }
+        public void update(int petId, DateTime date, MedicalEventType type, string? vetName, string? notes, DateTime? nextFollowup)
+        {
+
             PetId = petId;
             Date = date;
             Type = type;

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PatCareManagement.Infrastucture.Persistance.Data;
 
@@ -11,9 +12,11 @@ using PatCareManagement.Infrastucture.Persistance.Data;
 namespace PetCareManagement.Infrastucture.Migrations
 {
     [DbContext(typeof(PetCareDbContext))]
-    partial class PetCareDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251128095043_initaldb")]
+    partial class initaldb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,25 +67,25 @@ namespace PetCareManagement.Infrastucture.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MedicalEventId")
+                    b.Property<int?>("MedicalEventEventId")
                         .HasColumnType("int");
 
                     b.HasKey("LinkId");
 
                     b.HasIndex("AttachmentAttachId");
 
-                    b.HasIndex("MedicalEventId");
+                    b.HasIndex("MedicalEventEventId");
 
                     b.ToTable("eventAttachments");
                 });
 
             modelBuilder.Entity("PetCareManagement.Domain.Entity.MedicalEvent", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("EventId"));
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
@@ -102,7 +105,7 @@ namespace PetCareManagement.Infrastucture.Migrations
                     b.Property<string>("VetName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.HasKey("EventId");
 
                     b.HasIndex("PetId");
 
@@ -276,7 +279,7 @@ namespace PetCareManagement.Infrastucture.Migrations
 
                     b.HasOne("PetCareManagement.Domain.Entity.MedicalEvent", "MedicalEvent")
                         .WithMany("Attachments")
-                        .HasForeignKey("MedicalEventId");
+                        .HasForeignKey("MedicalEventEventId");
 
                     b.Navigation("Attachment");
 

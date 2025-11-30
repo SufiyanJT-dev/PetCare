@@ -25,7 +25,7 @@ namespace PetCareManagement.Domain.Entity
         public IReadOnlyCollection<EventAttachment> Links => _links.AsReadOnly();
 
       
-
+        private Attachment() { }
         public Attachment(string fileUrl, string fileName, string description)
         {
           
