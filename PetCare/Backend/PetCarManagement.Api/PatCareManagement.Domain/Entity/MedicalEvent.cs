@@ -28,9 +28,7 @@ namespace PetCareManagement.Domain.Entity
      
         public Pets? Pet { get; private set; }
 
-        private readonly List<EventAttachment> _attachments = new();
-        public IReadOnlyCollection<EventAttachment> Attachments => _attachments.AsReadOnly();
-
+    
      private MedicalEvent() { }
 
         public MedicalEvent(int petId, DateTime date, MedicalEventType type, string? vetName, string? notes, DateTime? nextFollowup)
@@ -54,10 +52,7 @@ namespace PetCareManagement.Domain.Entity
             NextFollowupDate = nextFollowup;
         }
 
-        public void AddAttachment(EventAttachment link)
-        {
-            _attachments.Add(link);
-        }
+      
     }
 
 }

@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PetCareManagement.Application.Pets.Command.AddPetComand;
-using PetCareManagement.Application.Pets.Command.DeletePetCommand;
-using PetCareManagement.Application.Pets.Command.UpdatePetDeatilsCommand;
-using PetCareManagement.Application.Pets.Query.GetPetOfUserId;
+using PetCareManagement.Application.Command.Pets.Command.AddPetComand;
+using PetCareManagement.Application.Command.Pets.Command.DeletePetCommand;
+using PetCareManagement.Application.Command.Pets.Command.UpdatePetDeatilsCommand;
+using PetCareManagement.Application.Query.Pets.GetPetOfUserId;
+
 
 namespace PetCareManagement.Api.Controllers
 {

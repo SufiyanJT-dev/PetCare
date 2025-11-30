@@ -17,10 +17,4 @@
     <ProjectReference Include="..\PatCareManagement.Domain\PetCareManagement.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="User\Dtos\" />
-    <Folder Include="User\Query\" />
-    <Folder Include="WeightHistory\Query\GetAllWeightHistory\" />
-  </ItemGroup>
-
 </Project>

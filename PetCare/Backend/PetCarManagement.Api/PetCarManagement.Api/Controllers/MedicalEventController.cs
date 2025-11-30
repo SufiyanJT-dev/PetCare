@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PetCareManagement.Application.MedicalEvent.Command.AddMedicalEventCommand;
-using PetCareManagement.Application.MedicalEvent.Command.DeleteMedicalEventCommand;
-using PetCareManagement.Application.MedicalEvent.Command.UpdateMedicalEventCommand;
-using PetCareManagement.Application.MedicalEvent.Dtos;
-using PetCareManagement.Application.MedicalEvent.Query.GetAllEventByPetIdQuery;
+using PetCareManagement.Application.Command.MedicalEvent.AddMedicalEventCommand;
+using PetCareManagement.Application.Command.MedicalEvent.DeleteMedicalEventCommand;
+using PetCareManagement.Application.Command.MedicalEvent.UpdateMedicalEventCommand;
+
+using PetCareManagement.Application.Query.Pets.GetAllEventByPetIdQuery;
 
 namespace PetCareManagement.Api.Controllers
 {

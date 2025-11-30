@@ -10,7 +10,7 @@ namespace PetCareManagement.Domain.Entity
     {
         [Key]
         public int AttachId { get; private set; }
-
+        public int MedicalEventId { get; private set; }
         [Required]
         public string FileUrl { get; private set; }
 
@@ -21,14 +21,21 @@ namespace PetCareManagement.Domain.Entity
        
         public string Description { get; private set; }
 
-        private readonly List<EventAttachment> _links = new();
-        public IReadOnlyCollection<EventAttachment> Links => _links.AsReadOnly();
+        public MedicalEvent MedicalEvent { get; private set; }
+        
 
       
         private Attachment() { }
-        public Attachment(string fileUrl, string fileName, string description)
+        public Attachment(int medicalEventId,string fileUrl, string fileName, string description)
         {
-          
+            MedicalEventId = medicalEventId;
+              FileUrl = fileUrl;
+            FileName = fileName;
+            Description = description;
+        }
+        public void Update(int medicalEventId, string fileUrl, string fileName, string description)
+        {
+            MedicalEventId = medicalEventId;
             FileUrl = fileUrl;
             FileName = fileName;
             Description = description;

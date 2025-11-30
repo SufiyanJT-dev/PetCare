@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PetCareManagement.Application.Command.User.command;
 
 namespace PetCareManagement.Api.Controllers
 {
@@ -15,7 +16,7 @@ namespace PetCareManagement.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPost("CreateUser")]
-        public async Task<IActionResult> CreateUser(Application.User.command.CreateUserCommand command)
+        public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
             try
             {

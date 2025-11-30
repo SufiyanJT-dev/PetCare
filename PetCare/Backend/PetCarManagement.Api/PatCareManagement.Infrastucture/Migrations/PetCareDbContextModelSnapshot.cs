@@ -42,38 +42,14 @@ namespace PetCareManagement.Infrastucture.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MedicalEventId")
+                        .HasColumnType("int");
+
                     b.HasKey("AttachId");
-
-                    b.ToTable("Attachments");
-                });
-
-            modelBuilder.Entity("PetCareManagement.Domain.Entity.EventAttachment", b =>
-                {
-                    b.Property<int>("LinkId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LinkId"));
-
-                    b.Property<int>("AttachId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("AttachmentAttachId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("EventId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MedicalEventId")
-                        .HasColumnType("int");
-
-                    b.HasKey("LinkId");
-
-                    b.HasIndex("AttachmentAttachId");
 
                     b.HasIndex("MedicalEventId");
 
-                    b.ToTable("eventAttachments");
+                    b.ToTable("Attachments");
                 });
 
             modelBuilder.Entity("PetCareManagement.Domain.Entity.MedicalEvent", b =>
@@ -268,17 +244,13 @@ namespace PetCareManagement.Infrastucture.Migrations
                     b.ToTable("WeightHistories");
                 });
 
-            modelBuilder.Entity("PetCareManagement.Domain.Entity.EventAttachment", b =>
+            modelBuilder.Entity("PetCareManagement.Domain.Entity.Attachment", b =>
                 {
-                    b.HasOne("PetCareManagement.Domain.Entity.Attachment", "Attachment")
-                        .WithMany("Links")
-                        .HasForeignKey("AttachmentAttachId");
-
                     b.HasOne("PetCareManagement.Domain.Entity.MedicalEvent", "MedicalEvent")
-                        .WithMany("Attachments")
-                        .HasForeignKey("MedicalEventId");
-
-                    b.Navigation("Attachment");
+                        .WithMany()
+                        .HasForeignKey("MedicalEventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("MedicalEvent");
                 });
@@ -326,16 +298,6 @@ namespace PetCareManagement.Infrastucture.Migrations
                     b.HasOne("PetCareManagement.Domain.Entity.Pets", null)
                         .WithMany("WeightHistory")
                         .HasForeignKey("PetsPetId");
-                });
-
-            modelBuilder.Entity("PetCareManagement.Domain.Entity.Attachment", b =>
-                {
-                    b.Navigation("Links");
-                });
-
-            modelBuilder.Entity("PetCareManagement.Domain.Entity.MedicalEvent", b =>
-                {
-                    b.Navigation("Attachments");
                 });
 
             modelBuilder.Entity("PetCareManagement.Domain.Entity.Pets", b =>

@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
-using PetCareManagement.Application.Auth.Command;
-using PetCareManagement.Application.Auth.Dtos;
-using PetCareManagement.Application.Auth.Query;
+using PetCareManagement.Application.Command.Auth.Command;
+using PetCareManagement.Application.Dos.Auth;
 using PetCareManagement.Application.IRepository;
+using PetCareManagement.Application.Query.Auth;
 
 namespace PetCareManagement.Api.Controllers
 {
