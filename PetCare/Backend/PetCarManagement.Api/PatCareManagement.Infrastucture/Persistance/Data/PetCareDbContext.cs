@@ -15,7 +15,7 @@ namespace PatCareManagement.Infrastucture.Persistance.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PetCareDb;User Id=sa;Password=12345678Aa;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PetCareDb;User Id=sa;Password=Sufiyan@123;TrustServerCertificate=True;");
 
         }
         public DbSet<User> Users { get; set; }
@@ -25,7 +25,7 @@ namespace PatCareManagement.Infrastucture.Persistance.Data
         public DbSet<MedicalEvent> MedicalEvents { get; set; }
        public DbSet<RefreshToken> _refreshTokens { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
-        public DbSet<EventAttachment> eventAttachments  { get; set; }
+     
         public  DbSet<Attachment> Attachments { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

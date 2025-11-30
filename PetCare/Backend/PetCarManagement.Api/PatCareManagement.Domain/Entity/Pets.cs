@@ -41,8 +41,7 @@ namespace PetCareManagement.Domain.Entity
 
        
         public User? Owner { get; private set; }
-        private readonly List<MedicalEvent> _medicalEvents = new();
-        public IReadOnlyCollection<MedicalEvent> MedicalEvents => _medicalEvents.AsReadOnly();
+       
 
         private readonly List<WeightHistory> _weightHistory = new();
         public IReadOnlyCollection<WeightHistory> WeightHistory => _weightHistory.AsReadOnly();
@@ -82,10 +81,7 @@ namespace PetCareManagement.Domain.Entity
         }
       
 
-        public void AddMedicalEvent(MedicalEvent ev)
-        {
-            _medicalEvents.Add(ev);
-        }
+      
 
         public void AddWeightHistory(WeightHistory wh)
         {

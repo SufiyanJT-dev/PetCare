@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PetCareManagement.Application.WeightHistory.Command.DeleteWeightHistory;
-using PetCareManagement.Application.WeightHistory.Query.GetAllWeightHistoryByPetId;
+using PetCareManagement.Application.Command.WeightHistory.CreateWeightHistory;
+using PetCareManagement.Application.Command.WeightHistory.DeleteWeightHistory;
+using PetCareManagement.Application.Command.WeightHistory.UpdateWeightHistory;
+using PetCareManagement.Application.Query.WeightHistory.GetAllWeightHistoryByPetId;
 
 namespace PetCareManagement.Api.Controllers
 {
@@ -17,7 +19,7 @@ namespace PetCareManagement.Api.Controllers
             _mediator = mediator;
         }
         [HttpPost("create")]
-        public async Task<IActionResult> CreateWeightHistory([FromBody] PetCareManagement.Application.WeightHistory.Command.CreateWeightHistory.CreateWeightHistoryCommand command)
+        public async Task<IActionResult> CreateWeightHistory([FromBody] CreateWeightHistoryCommand command)
         {
             try
             {
@@ -51,7 +53,7 @@ namespace PetCareManagement.Api.Controllers
             }
         }
         [HttpPut("update")]
-        public async Task<IActionResult> Update([FromBody] PetCareManagement.Application.WeightHistory.Command.UpdateWeightHistory.UpdateWeightHistoryCommand command)
+        public async Task<IActionResult> Update([FromBody] UpdateWeightHistoryCommand command)
         {
             try
             {

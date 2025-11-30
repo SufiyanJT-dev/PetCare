@@ -9,7 +9,7 @@ namespace PetCareManagement.Domain.Entity
     public class MedicalEvent
     {
         [Key]
-        public int EventId { get; private set; }
+        public int Id { get; private set; }
 
         [Required]
         public int PetId { get; private set; }
@@ -28,9 +28,7 @@ namespace PetCareManagement.Domain.Entity
      
         public Pets? Pet { get; private set; }
 
-        private readonly List<EventAttachment> _attachments = new();
-        public IReadOnlyCollection<EventAttachment> Attachments => _attachments.AsReadOnly();
-
+    
      private MedicalEvent() { }
 
         public MedicalEvent(int petId, DateTime date, MedicalEventType type, string? vetName, string? notes, DateTime? nextFollowup)
@@ -43,11 +41,18 @@ namespace PetCareManagement.Domain.Entity
             Notes = notes;
             NextFollowupDate = nextFollowup;
         }
-
-        public void AddAttachment(EventAttachment link)
+        public void update(int petId, DateTime date, MedicalEventType type, string? vetName, string? notes, DateTime? nextFollowup)
         {
-            _attachments.Add(link);
+
+            PetId = petId;
+            Date = date;
+            Type = type;
+            VetName = vetName;
+            Notes = notes;
+            NextFollowupDate = nextFollowup;
         }
+
+      
     }
 
 }
