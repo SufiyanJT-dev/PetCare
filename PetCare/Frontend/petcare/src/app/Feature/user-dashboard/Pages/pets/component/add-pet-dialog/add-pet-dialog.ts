@@ -10,6 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-add-pet-dialog',
@@ -18,7 +19,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
-  ReactiveFormsModule], 
+  ReactiveFormsModule,
+    CommonModule], 
   templateUrl: './add-pet-dialog.html',
   styleUrl: './add-pet-dialog.scss',
 })
