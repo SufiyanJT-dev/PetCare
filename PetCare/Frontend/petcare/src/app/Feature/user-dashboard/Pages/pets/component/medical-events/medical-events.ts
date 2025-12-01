@@ -28,6 +28,7 @@ dialog = inject(MatDialog);
       this.id = +params['petId'];
       this.httpService.getmedicalEvents(this.id).subscribe(data => {
         this.MedicalEventList = data;
+        console.log( this.MedicalEventList)
       });
     });
   }
@@ -36,8 +37,8 @@ dialog = inject(MatDialog);
       this.MedicalEventList = this.MedicalEventList.filter(me => me.id !== id);
     });
   }
-  gotoRemainder(id:number){
-   this.router.navigate(['/user-dashboard/reminders', id], { relativeTo: this.route });
+  AddAttachment(id:number){
+   this.router.navigate(['/user-dashboard/attachment', id], { relativeTo: this.route });
    
   }
   openDialog(event?: IMedicalEvent) {
@@ -56,12 +57,13 @@ dialog = inject(MatDialog);
           type: result.type,
           veterinarian: result.vetName,
           notes: result.notes,
-          nextFollowupDate: result.nextFollowupDate
+          nextFollowupDate: result.nextFollowupDate 
         };
         this.httpService.updateMedicalEvent(event.id, payload).subscribe({
           next: (updated: IMedicalEvent) => {
             const idx = this.MedicalEventList.findIndex(m => m.id === event.id);
             if (idx > -1) this.MedicalEventList[idx] = updated;
+            this.ngOnInit();
           },
           error: (err) => {
             console.error('Update MedicalEvent error body:', err.error);

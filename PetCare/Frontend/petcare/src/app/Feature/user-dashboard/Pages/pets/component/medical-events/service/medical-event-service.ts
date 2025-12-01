@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { IMedicalEvent } from '../type/medical-events.model';
+import { IMedicalEvent, IMedicalEventUpdate } from '../type/medical-events.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class MedicalEventService {
  addMedicalEvent(medicalEvent: IMedicalEvent) {
   const payload = {
     PetId: medicalEvent.petId,
-    Date: new Date(medicalEvent.date).toISOString(),
+    Date: medicalEvent.date,
     Type: medicalEvent.type,
     VetName: medicalEvent.vetName,
     Notes: medicalEvent.notes,
@@ -27,21 +27,23 @@ export class MedicalEventService {
       ? new Date(medicalEvent.nextFollowupDate).toISOString()
       : null
   };
+  console.log("update",payload)
   return this.http.post<IMedicalEvent>(`${this.apiUrl}/AddMedicalEvent`, payload);
 }
 
-updateMedicalEvent(id: number, medicalEvent: Partial<IMedicalEvent>) {
+updateMedicalEvent(id: number, medicalEvent: Partial<IMedicalEventUpdate>) {
   const payload = {
-    Id: id,
+    
     PetId: medicalEvent.petId ?? null,
-    Date: medicalEvent.date ? new Date(medicalEvent.date).toISOString() : null,
+    eventDate: medicalEvent.date ,
     Type: medicalEvent.type ?? null,
-    VetName: medicalEvent.vetName ?? null,
+    veterinarian: medicalEvent.veterinarian ?? null,
     Notes: medicalEvent.notes ?? null,
     NextFollowupDate: medicalEvent.nextFollowupDate
-      ? new Date(medicalEvent.nextFollowupDate).toISOString()
-      : null
+      
+     
   };
+  console.log("update",payload)
   return this.http.patch<IMedicalEvent>(`${this.apiUrl}/update/${id}`, payload);
 }
 }
