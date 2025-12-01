@@ -1,7 +1,7 @@
 export interface IMedicalEvent {
   id: number;
   petId: number,
-  date: Date;
+  date: Date |null;
   type: number;
   vetName: string;
   notes: string;
@@ -10,9 +10,9 @@ export interface IMedicalEvent {
 export interface IMedicalEventUpdate {
   id: number;
   petId: number,
-  date: Date;
+  date: Date | null;
   type: number;
   veterinarian: string;
   notes: string;
-  nextFollowupDate?: Date | null;
+  nextFollowupDate?: Date|null ;
 }

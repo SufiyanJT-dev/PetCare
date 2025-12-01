@@ -29,7 +29,7 @@ export class AddMedicalEventDialog {
   isEditMode = false;
 
   eventForm = this.fb.group({
-    date: ['', Validators.required],
+    date: ['', [Validators.required]],
     type: ['', Validators.required], // numeric but stored as string until save
     vetName: ['', Validators.required],
     notes: [''],
@@ -40,7 +40,7 @@ export class AddMedicalEventDialog {
     if (this.data) {
       this.isEditMode = true;
       this.eventForm.patchValue({
-        date: this.formatDate(this.data.date),
+        date: this.data.date?this.formatDate(this.data.date): '',
         type: String(this.data.type),
         vetName: this.data.vetName,
         notes: this.data.notes,
@@ -64,12 +64,13 @@ export class AddMedicalEventDialog {
     const result: IMedicalEvent = {
       id: this.data?.id ?? 0,
       petId: this.data?.petId ?? 0,
-      date: v.date ? new Date(v.date) : new Date(),
+      date: v.date ? new Date(v.date): null,
       type: v.type ? Number(v.type) : 0,
       vetName: v.vetName ?? '',
       notes: v.notes ?? '',
       nextFollowupDate: v.nextFollowupDate ? new Date(v.nextFollowupDate) : null
     };
+    
     this.dialogRef.close(result);
   }
 }

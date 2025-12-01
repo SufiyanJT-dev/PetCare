@@ -1,0 +1,47 @@
+<h2>Attachments for Medical Event: {{ id }}</h2>
+
+<!-- Toggle Form Button -->
+<button (click)="toggleForm()" class="btn btn-primary">
+  {{ showForm ? 'Hide Form' : 'Add Attachment' }}
+</button>
+
+<!-- FORM -->
+<div class="form-container" *ngIf="showForm">
+  <h3>{{ isEditMode ? "Edit Attachment" : "Add New Attachment" }}</h3>
+
+  <label>File Name</label>
+  <input type="text" [(ngModel)]="fileName">
+
+  <label>Description</label>
+  <textarea [(ngModel)]="description"></textarea>
+
+  <label>Upload File</label>
+  <input type="file" (change)="onFileChange($event)">
+
+  <button (click)="saveAttachment()" class="btn btn-primary">
+    {{ isEditMode ? "Update" : "Save" }}
+  </button>
+
+  <button *ngIf="isEditMode" (click)="resetForm()" class="btn btn-secondary">
+    Cancel Edit
+  </button>
+</div>
+
+<hr>
+
+<!-- ATTACHMENTS LIST -->
+<div class="attachment-list">
+  <div class="attachment-card" *ngFor="let a of attachments">
+    
+    <img [src]="'https://localhost:7121/' + a.fileUrl" width="100" height="100">
+
+    <div class="details">
+      <h4>{{ a.fileName }}</h4>
+      <p>{{ a.description }}</p>
+
+      <button (click)="editAttachment(a)">Edit</button>
+      <button class="danger" (click)="deleteAttachment(a.attachId)">Delete</button>
+    </div>
+
+  </div>
+</div>
