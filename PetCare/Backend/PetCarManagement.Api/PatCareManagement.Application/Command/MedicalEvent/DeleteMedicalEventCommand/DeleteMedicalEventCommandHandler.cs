@@ -11,15 +11,29 @@ namespace PetCareManagement.Application.Command.MedicalEvent.DeleteMedicalEventC
     public class DeleteMedicalEventCommandHandler : IRequestHandler<DeleteMedicalEventCommand, bool>
     {
         private readonly IGenericRepo<Domain.Entity.MedicalEvent> genericRepo;
+        private readonly IReminderScheduler scheduler;
+        private readonly IGenericRepo<Domain.Entity.Reminder> reminder;
 
-        public DeleteMedicalEventCommandHandler(IGenericRepo<Domain.Entity.MedicalEvent> genericRepo)
+        public DeleteMedicalEventCommandHandler(IGenericRepo<Domain.Entity.MedicalEvent> genericRepo,IReminderScheduler scheduler,IGenericRepo<Domain.Entity.Reminder> reminder)
         {
             this.genericRepo = genericRepo;
+            this.scheduler = scheduler;
+            this.reminder = reminder;
         }
-        public Task<bool> Handle(DeleteMedicalEventCommand request, CancellationToken cancellationToken)
+        public async  Task<bool> Handle(DeleteMedicalEventCommand request, CancellationToken cancellationToken)
         {
-          
-            return genericRepo.DeleteAsync(request.EventId); 
+            Domain.Entity.MedicalEvent? medicalEvent = await genericRepo.GetByIdAsync(request.EventId);
+            IEnumerable< Domain.Entity.Reminder> reminders = await reminder.FindAsync(r =>
+                r.SourceType == "MedicalEvent" && r.LinkedEntityId == request.EventId);
+            foreach (Domain.Entity.Reminder rem in reminders)
+            {
+                if (!string.IsNullOrEmpty(rem.JobId))
+                {
+                     scheduler.CancelReminder(rem.JobId);
+                }
+            }
+            return await genericRepo.DeleteAsync(request.EventId); 
+            
         }
     }
 }

@@ -8,10 +8,10 @@ namespace PetCareManagement.Domain.Enum
 {
     public enum MedicalEventType
     {
-        Vaccination,
-        VetVisit,
-        Medication,
-        Surgery,
-        Other
+        Vaccination=0,
+        VetVisit=1,
+        Medication=2,
+        Surgery=3,
+        Other=4
     }
 }
