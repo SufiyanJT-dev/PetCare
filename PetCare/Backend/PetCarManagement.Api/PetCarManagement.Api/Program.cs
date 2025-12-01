@@ -1,5 +1,7 @@
 using FluentValidation;
 using MediatR;
+using Hangfire;
+using Hangfire.MemoryStorage; 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -23,6 +25,9 @@ builder.Services.AddMediatR(cfg =>
 });
 
 builder.Services.AddDbContext<PetCareDbContext>();
+builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
+builder.Services.AddScoped<IReminderScheduler, HangfireReminderScheduler>();
+builder.Services.AddScoped<ReminderEmailService>();
 
 builder.Services.AddScoped<IUserRepository<User>, UserRepo>();
 builder.Services.AddScoped<IGenericRepo<Pets>, PetsRepository>();
@@ -66,13 +71,18 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod()
               .AllowCredentials());
 });
-
+builder.Services.AddHangfire(config =>
+{
+    // Use memory storage for demo; replace with SQL Server, Redis, etc.
+    config.UseMemoryStorage();
+});
+builder.Services.AddHangfireServer();
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-
+app.UseHangfireDashboard("/hangfire");
 
 app.UseCors("AllowLocalSwagger");
 

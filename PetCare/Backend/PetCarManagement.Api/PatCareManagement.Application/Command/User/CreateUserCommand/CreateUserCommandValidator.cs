@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using PetCareManagement.Application.Command.User.command;
 using PetCareManagement.Application.IRepository;
-
+using Users=PetCareManagement.Domain.Entity.User;
 public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
 {
     private readonly IAuth _auth;
@@ -15,7 +15,7 @@ public class CreateUserCommandValidator : AbstractValidator<CreateUserCommand>
             .EmailAddress()
             .MustAsync(async (email, cancellation) =>
             {
-                var user = await _auth.FindByEmailAsync(email, cancellation);
+                Users user = await _auth.FindByEmailAsync(email, cancellation);
                 return user == null; 
             })
             .WithMessage("Email is already in use.");

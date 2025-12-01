@@ -8,9 +8,10 @@ namespace PetCareManagement.Domain.Enum
 {
     public enum ReminderType
     {
-        Appointment,
-        Medication,
-        Vaccination,
-        Custom
+        Appointment=0,
+        Medication=1,
+        Vaccination=2,
+        MedicalEvents=3,
+        Custom=4
     }
 }

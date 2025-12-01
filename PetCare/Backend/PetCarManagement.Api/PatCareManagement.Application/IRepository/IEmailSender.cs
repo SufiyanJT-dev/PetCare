@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace PetCareManagement.Application.IRepository
 {
-    public interface IPetRepository: IGenericRepo<Domain.Entity.Pets>
+    public interface IEmailSender
     {
-        public Task<List<Domain.Entity.Pets>> GetPetByOwnerIdAsync(int ownerId);
-
+       public Task SendAsync(string to, string subject, string body);
     }
 }

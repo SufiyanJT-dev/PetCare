@@ -46,9 +46,7 @@ namespace PetCareManagement.Domain.Entity
         private readonly List<WeightHistory> _weightHistory = new();
         public IReadOnlyCollection<WeightHistory> WeightHistory => _weightHistory.AsReadOnly();
 
-        private readonly List<Reminder> _reminders = new();
-        public IReadOnlyCollection<Reminder> Reminders => _reminders.AsReadOnly();
-
+       
         private Pets() { }
 
         public Pets(int userId, string name, Species species, string breed, DateTime dateOfBirth)
@@ -88,10 +86,7 @@ namespace PetCareManagement.Domain.Entity
             _weightHistory.Add(wh);
         }
 
-        public void AddReminder(Reminder r)
-        {
-            _reminders.Add(r);
-        }
+       
     }
 
 
