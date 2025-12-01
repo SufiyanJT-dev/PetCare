@@ -97,7 +97,7 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.MapControllers();
