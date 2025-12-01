@@ -1,0 +1,62 @@
+<div class="flex justify-between">
+  <h1>Medical Events</h1>
+  <button 
+    mat-flat-button 
+    class="!bg-green-500 !text-white" 
+    (click)="openDialog()"
+  >
+    Add
+  </button>
+</div>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Date</th>
+      <th>Type</th>
+      <th>Vet Name</th>
+      <th>Notes</th>
+      <th>Next Follow-up</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    @for (item of MedicalEventList; track $index) {
+      <tr>
+        <td>{{ $index + 1 }}</td>
+        <td>{{ item.date | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ item.type }}</td>
+        <td>{{ item.vetName }}</td>
+        <td>{{ item.notes }}</td>
+        <td>{{ item.nextFollowupDate | date: 'dd/MM/yyyy' }}</td>
+        <td class="flex gap-4">
+          
+          <button 
+            mat-flat-button 
+            class="!bg-blue-500 !text-white"
+            (click)="openDialog(item)"
+          >
+            Edit
+          </button>
+
+          <button 
+            mat-flat-button 
+            class="!bg-red-500 !text-white"
+            (click)="deleteMedicalEvent(item.id)"
+          >
+            Delete
+          </button>
+           <button 
+            mat-flat-button 
+            class="!bg-red-500 !text-white"
+            (click)="gotoRemainder(item.id)"
+          >
+            view Remainder
+          </button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
