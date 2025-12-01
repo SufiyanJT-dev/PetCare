@@ -5,6 +5,8 @@ import { UserDashboard } from './Feature/user-dashboard/user-dashboard';
 import { Profile } from './Feature/user-dashboard/Pages/profile/profile';
 import { Pets } from './Feature/user-dashboard/Pages/pets/pets';
 import { Weighthistory } from './Feature/user-dashboard/Pages/pets/component/weighthistory/weighthistory';
+import { MedicalEvents } from './Feature/user-dashboard/Pages/pets/component/medical-events/medical-events';
+import { Remainder } from './Feature/user-dashboard/Pages/pets/component/medical-events/component/remainder/remainder';
 
 export const routes: Routes = [
   { path: 'sign-up', component: SignUp },
@@ -14,7 +16,9 @@ export const routes: Routes = [
     children:[
       {path:'profile',component:Profile},
       {path:'Pet-management',component:Pets},
-     {path:'weight-history/:petId',component:Weighthistory}
+     {path:'weight-history/:petId',component:Weighthistory},
+     {path:'medical-events/:petId',component:MedicalEvents},
+     {path: 'reminders/:petId', component: Remainder},
     ]},
   
 

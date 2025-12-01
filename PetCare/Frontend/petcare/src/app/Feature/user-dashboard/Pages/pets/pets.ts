@@ -63,7 +63,7 @@ gotoViewAllDocuments(petId:number){
 
 }
 gotoViewAllMedicalEvents(petId:number){
-
+this.router.navigate(['/user-dashboard/medical-events', petId], { relativeTo: this.route });
 }
 healthStatic(petId:number){
 this.router.navigate(['/user-dashboard/weight-history', petId], { relativeTo: this.route });
