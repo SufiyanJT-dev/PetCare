@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetCareManagement.Application.Command.Pets.Command.AddPetComand;
@@ -19,7 +20,9 @@ namespace PetCareManagement.Api.Controllers
         {
             this.mediator = mediator;
         }
+
         [HttpPost("AddPet")]
+        [Authorize]
         public async Task<IActionResult> AddPet(AddPetComand command)
         {
             try
@@ -56,6 +59,7 @@ namespace PetCareManagement.Api.Controllers
             }
         }
         [HttpGet("GetPetsByOwnerId{ownerId}")]
+        [Authorize]
         public async Task<IActionResult> GetPetsByOwnerId(int ownerId)
         {
             try

@@ -20,7 +20,7 @@ export const routes: Routes = [
      {path:'weight-history/:petId',component:Weighthistory},
      {path:'medical-events/:petId',component:MedicalEvents},
      {path: 'reminders/:petId', component: Remainder},
-     {path:'attachment/:Id',component:AddAttachment}
+     {path:'attachment/:Id',component:AddAttachment},
     ]},
   
 

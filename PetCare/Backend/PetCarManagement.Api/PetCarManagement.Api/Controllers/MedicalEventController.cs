@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetCareManagement.Application.Command.MedicalEvent.AddMedicalEventCommand;
@@ -38,6 +39,7 @@ namespace PetCareManagement.Api.Controllers
             }
         }
         [HttpGet("getByPetId/{petId}")]
+        [Authorize]
         public async Task<IActionResult> GetByPetId(int petId)
         {
             try
