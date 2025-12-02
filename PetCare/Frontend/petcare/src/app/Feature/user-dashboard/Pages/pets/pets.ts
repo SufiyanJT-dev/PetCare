@@ -15,6 +15,7 @@ import { Api } from './service/api';
 import { ResponseForGetById } from './Type/ResponseForGetById';
 import { GetIdServices } from '../../../../Shared/Service/get-id-services';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { Console } from 'console';
 
 @Component({
   selector: 'app-pets',
@@ -38,7 +39,8 @@ export class Pets {
   petsDetails = signal<ResponseForGetById[]>([]);
   constructor(private dialog: MatDialog,private route:ActivatedRoute,private apiPets:Api,private getIdServices :GetIdServices,private router:Router) {}
   ngOnInit(){
-   
+   const token = localStorage.getItem('accessToken');
+   console.log(token);
     this.userId = this.getIdServices.getUserID();
     this.apiPets.getAllpetByUserID(this.userId).subscribe({
       next:(value)=>{
