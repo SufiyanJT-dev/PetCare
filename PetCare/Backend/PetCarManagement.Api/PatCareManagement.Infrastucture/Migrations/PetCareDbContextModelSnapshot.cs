@@ -296,7 +296,7 @@ namespace PetCareManagement.Infrastucture.Migrations
             modelBuilder.Entity("PetCareManagement.Domain.Entity.Reminder", b =>
                 {
                     b.HasOne("PetCareManagement.Domain.Entity.Pets", "Pet")
-                        .WithMany("Reminders")
+                        .WithMany()
                         .HasForeignKey("PetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -313,8 +313,6 @@ namespace PetCareManagement.Infrastucture.Migrations
 
             modelBuilder.Entity("PetCareManagement.Domain.Entity.Pets", b =>
                 {
-                    b.Navigation("Reminders");
-
                     b.Navigation("WeightHistory");
                 });
 

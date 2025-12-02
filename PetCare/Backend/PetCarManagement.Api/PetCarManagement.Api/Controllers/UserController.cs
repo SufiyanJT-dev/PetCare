@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PetCareManagement.Application.Command.User.command;
+using PetCareManagement.Application.Dos.User;
+using PetCareManagement.Application.Query.User;
 
 namespace PetCareManagement.Api.Controllers
 {
@@ -11,7 +13,7 @@ namespace PetCareManagement.Api.Controllers
     {
         private readonly IMediator mediator;
 
-        public UserController(IMediator mediator) 
+        public UserController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -27,6 +29,26 @@ namespace PetCareManagement.Api.Controllers
                     UserId = userId,
                     Message = "User registered successfully!"
                 });
+            }
+            catch (FluentValidation.ValidationException ex)
+            {
+                return BadRequest(new { Errors = ex.Errors.Select(e => e.ErrorMessage) });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+        [HttpGet("GetUserById/{userId}")]
+        public async Task<IActionResult> GetUserById(int userId)
+        {
+            try
+            {
+                GetUserByIdQuery query = new GetUserByIdQuery();
+                query.UserId = userId;
+                UserDtos user = await mediator.Send(query);
+
+                return Ok(user);
             }
             catch (FluentValidation.ValidationException ex)
             {

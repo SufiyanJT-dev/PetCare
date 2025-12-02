@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace PetCareManagement.Infrastucture.Migrations
 {
     /// <inheritdoc />
-    public partial class intialdb : Migration
+    public partial class changeintable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -111,16 +111,19 @@ namespace PetCareManagement.Infrastucture.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsCompleted = table.Column<bool>(type: "bit", nullable: false),
-                    PetsPetId = table.Column<int>(type: "int", nullable: true)
+                    JobId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SourceType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LinkedEntityId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reminders", x => x.ReminderId);
                     table.ForeignKey(
-                        name: "FK_Reminders_Pets_PetsPetId",
-                        column: x => x.PetsPetId,
+                        name: "FK_Reminders_Pets_PetId",
+                        column: x => x.PetId,
                         principalTable: "Pets",
-                        principalColumn: "PetId");
+                        principalColumn: "PetId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -187,9 +190,9 @@ namespace PetCareManagement.Infrastucture.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reminders_PetsPetId",
+                name: "IX_Reminders_PetId",
                 table: "Reminders",
-                column: "PetsPetId");
+                column: "PetId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_WeightHistories_PetsPetId",

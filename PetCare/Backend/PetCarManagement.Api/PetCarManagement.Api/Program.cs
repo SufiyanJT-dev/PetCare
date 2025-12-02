@@ -33,8 +33,9 @@ builder.Services.AddScoped<IUserRepository<User>, UserRepo>();
 builder.Services.AddScoped<IGenericRepo<Pets>, PetsRepository>();
 builder.Services.AddScoped<IPetRepository, PetsRepository>();
 builder.Services.AddScoped<IAuth, AuthRepository>();
+builder.Services.AddScoped<IAttachmentRepo, AttachmentRepository>();
 builder.Services.AddScoped<IFileStorageService, LocalFileStorageService>();
-
+builder.Services.AddScoped<IPetRepository, PetsRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 

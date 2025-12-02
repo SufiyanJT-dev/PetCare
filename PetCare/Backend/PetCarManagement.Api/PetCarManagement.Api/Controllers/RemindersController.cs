@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetCareManagement.Application.Command.Reminder.CreateCommand;
 using PetCareManagement.Application.Command.Reminder.DeleteCommand;
 using PetCareManagement.Application.Command.Reminder.UpdateCommand;
+using PetCareManagement.Application.Query.Reminder.GetAllpreviousReminderByPetId;
 using PetCareManagement.Application.Query.Reminder.GetAllReminderByPetId;
 using PetCareManagement.Domain.Entity;
 
@@ -23,7 +24,8 @@ namespace PetCareManagement.Api.Controllers
         public async Task<IActionResult> CreateReminder(CreateReminderCommand command)
         {
             try
-            {   int reminderId = await mediator.Send(command);
+            {
+                int reminderId = await mediator.Send(command);
                 return new OkObjectResult(new { ReminderId = reminderId });
             }
             catch (FluentValidation.ValidationException ex)
@@ -40,10 +42,10 @@ namespace PetCareManagement.Api.Controllers
         {
             try
             {
-               DeleteReminderCommand command = new DeleteReminderCommand();
+                DeleteReminderCommand command = new DeleteReminderCommand();
                 command.Id = Id;
-                int reminderId=await mediator.Send(command);
-                return Ok(new { Message = "Reminder deleted successfully. "+ reminderId });
+                int reminderId = await mediator.Send(command);
+                return Ok(new { Message = "Reminder deleted successfully. " + reminderId });
             }
             catch (FluentValidation.ValidationException ex)
             {
@@ -55,7 +57,7 @@ namespace PetCareManagement.Api.Controllers
             }
         }
         [HttpPatch("{Id}")]
-        public async Task<IActionResult> UpdateReminder(int Id,  UpdateReminderCommand command)
+        public async Task<IActionResult> UpdateReminder(int Id, UpdateReminderCommand command)
         {
             try
             {
@@ -79,7 +81,26 @@ namespace PetCareManagement.Api.Controllers
             {
                 GetAllReminderByPetIdQuery query = new GetAllReminderByPetIdQuery();
                 query.PetId = Id;
-                IEnumerable< Reminder> reminders = await mediator.Send(query);
+                IEnumerable<MedicalEvent> reminders = await mediator.Send(query);
+                return Ok(reminders);
+            }
+            catch (FluentValidation.ValidationException ex)
+            {
+                return BadRequest(new { Errors = ex.Errors.Select(e => e.ErrorMessage) });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+        [HttpGet("GetPreviousReminders/{Id}")]
+        public async Task<IActionResult> GetPreviousReminders(int Id)
+        {
+            try
+            {
+                GetAllpreviousReminderByPetIdQuery query = new GetAllpreviousReminderByPetIdQuery();
+                query.PetId = Id;
+                IEnumerable<MedicalEvent> reminders = await mediator.Send(query);
                 return Ok(reminders);
             }
             catch (FluentValidation.ValidationException ex)

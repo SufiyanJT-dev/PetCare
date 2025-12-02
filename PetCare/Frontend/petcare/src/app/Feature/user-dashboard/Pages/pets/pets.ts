@@ -59,10 +59,10 @@ export class Pets {
   this.openDialog(pet);  
 }
 gotoViewAllReminder(petId:number){
-
+this.router.navigate(['/user-dashboard/remainder', petId], { relativeTo: this.route });
 }
 gotoViewAllDocuments(petId:number){
-
+this.router.navigate(['/user-dashboard/document', petId], { relativeTo: this.route });
 }
 gotoViewAllMedicalEvents(petId:number){
 this.router.navigate(['/user-dashboard/medical-events', petId], { relativeTo: this.route });

@@ -6,6 +6,7 @@ using PetCareManagement.Application.Command.Attachment.DeleteAttachmentCommand;
 using PetCareManagement.Application.Command.Attachment.UpdateAttachmentCommand;
 using PetCareManagement.Application.Dos.Attachment;
 using PetCareManagement.Application.Query.Attachment.GetAllAttachment;
+using PetCareManagement.Application.Query.Attachment.GetAllAttachmentByPetId;
 using PetCareManagement.Application.Query.Attachment.GetAllByEventIdAttachment;
 
 namespace PetCareManagement.Api.Controllers
@@ -129,7 +130,25 @@ namespace PetCareManagement.Api.Controllers
                 return BadRequest(new { Error = ex.Message });
             }
         }
+        [HttpGet("GetByPetId{Id}")]
+        public async Task<IActionResult> GetAllAttachmentsByPetId(int Id)
+        {
+            try
+            {
+                GetAllAttachmentByPetIdQuery query = new GetAllAttachmentByPetIdQuery();
+                query.PetId = Id;
+                 
+                return Ok(await mediator.Send(query));
+            }
+            catch (FluentValidation.ValidationException ex)
+            {
+                return BadRequest(new { Errors = ex.Errors.Select(e => e.ErrorMessage) });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
 
-
+        }
     }
 }

@@ -4,23 +4,26 @@ import { Header } from '../header/header';
 import { Menu } from './menu.model'
 import { MenuItem } from './menu-item/menu-item';
 import { RouterOutlet } from '@angular/router';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [MatSidenavModule,Header,MenuItem,RouterOutlet],
+  imports: [MatSidenavModule,MatIconModule,MatExpansionModule,Header,MenuItem,RouterOutlet],
   templateUrl: './layout.html',
   styleUrls: ['./layout.scss'],
 })
 export class Layout {
   
-  menu: Menu = [
-  {
-    title: 'Pet Management',
-    icon: 'pets',
-    link: '/user-dashboard/Pet-management', 
-    color: '#2f05ffff',
-  },
-];
+   menu: Menu = [
+    {
+      title: 'Pet Management',
+      icon: 'pets',
+      link: '/user-dashboard/pet-management',
+      color: 'rgba(47, 5, 255, 1)',
+    },
+   
+  ];
 
   opened = false;
 

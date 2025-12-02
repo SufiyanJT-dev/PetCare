@@ -1,0 +1,15 @@
+<select [(ngModel)]="selectedType" (change)="sortByType()">
+  <option [ngValue]="null">-- Sort by Type --</option>
+  <option *ngFor="let type of reminderTypes" [ngValue]="type.value">
+    {{ type.label }}
+  </option>
+</select>
+
+<div *ngFor="let r of reminders" class="reminder-card">
+  <p>Date: {{ r.date | date }}</p>
+  <p>Type: {{ getReminderTypeLabel(r.type) }}</p>
+  <p>Vet: {{ r.vetName }}</p>
+  <p>Notes: {{ r.notes }}</p>
+  <p>Next Follow-up: {{ r.nextFollowupDate | date }}</p>
+  <p>Pet: {{ r.petName }} ({{ r.breed }})</p>
+</div>
