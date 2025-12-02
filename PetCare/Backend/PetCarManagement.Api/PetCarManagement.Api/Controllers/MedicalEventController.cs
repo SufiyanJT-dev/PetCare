@@ -20,6 +20,7 @@ namespace PetCareManagement.Api.Controllers
             this.mediator = mediator;
         }
         [HttpPost("AddMedicalEvent")]
+        //public async Task<IActionResult> All
         public async Task<IActionResult> AddMedicalEvent(AddMedicalEventCommand command)
         {
             try

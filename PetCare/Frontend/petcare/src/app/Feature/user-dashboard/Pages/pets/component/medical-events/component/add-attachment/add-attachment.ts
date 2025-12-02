@@ -67,6 +67,7 @@ toggleForm() {
      console.log(formData);
 
     if (this.isEditMode && this.attachmentId) {   
+       formData.append("medicalEventId", this.id.toString());
       this.attachmentApi.updateMedical(this.attachmentId, formData).subscribe({
         next: () => {
           this.resetForm();
