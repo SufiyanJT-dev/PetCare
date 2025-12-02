@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Reminders = PetCareManagement.Domain.Entity.Reminder;
-namespace PetCareManagement.Application.Query.Reminder.GetAllReminderByPetId
+namespace PetCareManagement.Application.Query.Reminder.GetAllpreviousReminderByPetId
 {
-    public class GetAllReminderByPetIdQuery:IRequest<IEnumerable<MedicalEvent>>
+    public class GetAllpreviousReminderByPetIdQuery:IRequest<IEnumerable<MedicalEvent>>
     {
         public int PetId { get; set; }
      

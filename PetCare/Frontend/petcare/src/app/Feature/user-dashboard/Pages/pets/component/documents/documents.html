@@ -1,0 +1,36 @@
+<div class="attachments-container" *ngIf="attachments.length > 0; else noData">
+  <h2>Attachments for Pet {{ petId }}</h2>
+  <ul class="attachment-list">
+    <li class="attachment-item" *ngFor="let att of attachments">
+      <div class="file-header">
+        <strong class="file-name">{{ att.fileName }}</strong>
+        <span class="file-desc">({{ att.description }})</span>
+      </div>
+
+      <a class="view-link" [href]="'https://localhost:7121/' + att.fileUrl" target="_blank">
+        View File
+      </a>
+
+      <div class="meta">
+        <div>
+          <strong>Medical Event Date:</strong>
+          {{ att.medicalEvent?.date | date }}
+        </div>
+
+        <div>
+          <strong>Type:</strong>
+         {{ medicalEventType[att.medicalEvent.type] }}
+        </div>
+
+        <div>
+          <strong>Notes:</strong>
+          {{ att.medicalEvent?.notes }}
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noData>
+  <p class="no-data">No attachments found for this pet.</p>
+</ng-template>

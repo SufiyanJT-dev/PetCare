@@ -1,18 +1,17 @@
-<mat-list>
+<mat-nav-list>
   <ng-container *ngFor="let item of menu">
-    <mat-list-item
-      *ngIf="item.title"
-      [routerLink]="item.link"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-      class="custom-item"
-    >
-      <div class="list-content">
-        <mat-icon [style.color]="item.color">
-          {{ item.icon }}
-        </mat-icon>
-        <span class="list-title">{{ item.title }}</span>
-      </div>
+    <!-- Main menu item -->
+    <mat-list-item [routerLink]="item.link">
+      <mat-icon matListIcon>{{ item.icon }}</mat-icon>
+      <span matLine>{{ item.title }}</span>
+      <mat-icon *ngIf="item.subMenu" (click)="item.expanded = !item.expanded">
+        {{ item.expanded ? 'expand_less' : 'expand_more' }}
+      </mat-icon>
     </mat-list-item>
+
+    <!-- Submenu items -->
+    <div *ngIf="item.subMenu && item.expanded" class="sub-menu">
+      <app-menu-item [menu]="item.subMenu"></app-menu-item>
+    </div>
   </ng-container>
-</mat-list>
+</mat-nav-list>

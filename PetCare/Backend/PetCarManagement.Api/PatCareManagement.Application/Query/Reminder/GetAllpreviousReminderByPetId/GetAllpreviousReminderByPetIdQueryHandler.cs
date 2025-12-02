@@ -9,19 +9,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Reminders = PetCareManagement.Domain.Entity.Reminder;
 
-namespace PetCareManagement.Application.Query.Reminder.GetAllReminderByPetId
+namespace PetCareManagement.Application.Query.Reminder.GetAllpreviousReminderByPetId
 {
-    public class GetAllReminderByPetIdQueryHandler : IRequestHandler<GetAllReminderByPetIdQuery, IEnumerable<MedicalEvent>>
+    public class GetAllpreviousReminderByPetIdQueryHandler : IRequestHandler<GetAllpreviousReminderByPetIdQuery, IEnumerable<MedicalEvent>>
     {
         private readonly IGenericRepo<MedicalEvent> genericRepo;
 
-        public GetAllReminderByPetIdQueryHandler(IGenericRepo<MedicalEvent> genericRepo)
+        public GetAllpreviousReminderByPetIdQueryHandler(IGenericRepo<MedicalEvent> genericRepo)
         {
             this.genericRepo = genericRepo;
         }
-        public async Task<IEnumerable<MedicalEvent>> Handle(GetAllReminderByPetIdQuery request, CancellationToken cancellationToken)
+        public async Task<IEnumerable<MedicalEvent>> Handle(GetAllpreviousReminderByPetIdQuery request, CancellationToken cancellationToken)
         {
-            Expression<Func<MedicalEvent, bool>> upcoming = wh => wh.PetId == request.PetId && wh.NextFollowupDate>=DateTime.Now;
+            Expression<Func<MedicalEvent, bool>> upcoming = wh => wh.PetId == request.PetId && wh.NextFollowupDate<DateTime.Now;
            IEnumerable<MedicalEvent> reminders = await genericRepo.FindAsync(upcoming);
             return reminders.OrderBy(r => r.NextFollowupDate);
 

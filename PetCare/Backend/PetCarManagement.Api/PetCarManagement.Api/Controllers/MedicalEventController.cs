@@ -1,11 +1,14 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using PetCareManagement.Application.Command.MedicalEvent.AddMedicalEventCommand;
 using PetCareManagement.Application.Command.MedicalEvent.DeleteMedicalEventCommand;
 using PetCareManagement.Application.Command.MedicalEvent.UpdateMedicalEventCommand;
 
 using PetCareManagement.Application.Query.Pets.GetAllEventByPetIdQuery;
+using PetCareManagement.Application.Query.Pets.GetAllEventQuery;
 
 namespace PetCareManagement.Api.Controllers
 {
@@ -19,8 +22,24 @@ namespace PetCareManagement.Api.Controllers
         {
             this.mediator = mediator;
         }
-        [HttpPost("AddMedicalEvent")]
-        //public async Task<IActionResult> All
+        
+        [HttpGet]
+        public async Task<IActionResult> getAllEvent()
+        {
+            try
+            {
+                GetAllEventQuery query = new GetAllEventQuery();
+                 
+                   IEnumerable<Domain.Entity.MedicalEvent> enumerable= await mediator.Send(query);
+                return Ok(enumerable);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Error = ex.Message });
+            }
+        }
+       [HttpPost("AddMedicalEvent")]
+       
         public async Task<IActionResult> AddMedicalEvent(AddMedicalEventCommand command)
         {
             try

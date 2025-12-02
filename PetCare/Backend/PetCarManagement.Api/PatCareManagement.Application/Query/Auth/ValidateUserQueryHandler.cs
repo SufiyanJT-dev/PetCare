@@ -15,10 +15,10 @@ namespace PetCareManagement.Application.Query.Auth
     public class ValidateUserQueryHandler : IRequestHandler<ValidateUserQuery, AuthResult>
     {
         private readonly IAuth _auth;
-        private readonly IPasswordHasher<User> _passwordHasher;
+        private readonly IPasswordHasher<Domain.Entity.User> _passwordHasher;
         private readonly ITokenService _tokenService;
 
-        public ValidateUserQueryHandler(IAuth auth, IPasswordHasher<User> passwordHasher, ITokenService tokenService)
+        public ValidateUserQueryHandler(IAuth auth, IPasswordHasher<Domain.Entity.User> passwordHasher, ITokenService tokenService)
         {
             _auth = auth;
             _passwordHasher = passwordHasher;

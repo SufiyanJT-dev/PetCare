@@ -12,8 +12,8 @@ using PatCareManagement.Infrastucture.Persistance.Data;
 namespace PetCareManagement.Infrastucture.Migrations
 {
     [DbContext(typeof(PetCareDbContext))]
-    [Migration("20251201085507_initialdb")]
-    partial class initialdb
+    [Migration("20251202081233_changeintable")]
+    partial class changeintable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -299,7 +299,7 @@ namespace PetCareManagement.Infrastucture.Migrations
             modelBuilder.Entity("PetCareManagement.Domain.Entity.Reminder", b =>
                 {
                     b.HasOne("PetCareManagement.Domain.Entity.Pets", "Pet")
-                        .WithMany("Reminders")
+                        .WithMany()
                         .HasForeignKey("PetId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -316,8 +316,6 @@ namespace PetCareManagement.Infrastucture.Migrations
 
             modelBuilder.Entity("PetCareManagement.Domain.Entity.Pets", b =>
                 {
-                    b.Navigation("Reminders");
-
                     b.Navigation("WeightHistory");
                 });
 

@@ -6,8 +6,9 @@ import { Profile } from './Feature/user-dashboard/Pages/profile/profile';
 import { Pets } from './Feature/user-dashboard/Pages/pets/pets';
 import { Weighthistory } from './Feature/user-dashboard/Pages/pets/component/weighthistory/weighthistory';
 import { MedicalEvents } from './Feature/user-dashboard/Pages/pets/component/medical-events/medical-events';
-import { Remainder } from './Feature/user-dashboard/Pages/pets/component/medical-events/component/remainder/remainder';
+import { Reminder } from './Feature/user-dashboard/Pages/pets/component/reminder/reminder';
 import { AddAttachment } from './Feature/user-dashboard/Pages/pets/component/medical-events/component/add-attachment/add-attachment';
+import { Documents } from './Feature/user-dashboard/Pages/pets/component/documents/documents';
 
 export const routes: Routes = [
   { path: 'sign-up', component: SignUp },
@@ -16,11 +17,12 @@ export const routes: Routes = [
   {path: 'user-dashboard',component:UserDashboard,
     children:[
       {path:'profile',component:Profile},
-      {path:'Pet-management',component:Pets},
+      {path:'pet-management',component:Pets},
      {path:'weight-history/:petId',component:Weighthistory},
      {path:'medical-events/:petId',component:MedicalEvents},
-     {path: 'reminders/:petId', component: Remainder},
-     {path:'attachment/:Id',component:AddAttachment}
+     {path: 'remainder/:petId', component: Reminder},
+     {path:'attachment/:Id',component:AddAttachment},
+     {path:'document/:petId',component:Documents}
     ]},
   
 

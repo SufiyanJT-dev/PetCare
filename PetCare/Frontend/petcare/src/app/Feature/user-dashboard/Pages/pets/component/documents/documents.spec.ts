@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { Remainder } from './remainder';
+import { Documents } from './documents';
 
-describe('Remainder', () => {
-  let component: Remainder;
-  let fixture: ComponentFixture<Remainder>;
+describe('Documents', () => {
+  let component: Documents;
+  let fixture: ComponentFixture<Documents>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Remainder]
+      imports: [Documents]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(Remainder);
+    fixture = TestBed.createComponent(Documents);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

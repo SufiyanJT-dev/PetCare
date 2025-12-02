@@ -8,7 +8,7 @@ import { RequestForAddPet } from '../component/add-pet-dialog/Type/RequestForAdd
 })
 export class Api {
   constructor(private http:HttpClient){}
-  baseUrl:string="https://localhost:7121/api/pets/"
+  private baseUrl:string="https://localhost:7121/api/pets/"
   getAllpetByUserID(ownerId:number):Observable<any>{
     return this.http.get(`${this.baseUrl}GetPetsByOwnerId${ownerId}`)
   }
@@ -21,4 +21,5 @@ export class Api {
   updatePet(petId:number,payload:RequestForAddPet):Observable<any>{
      return this.http.patch(`${this.baseUrl}UpdatePetDetails${petId}`,payload)
   }
+ 
 }
