@@ -57,6 +57,7 @@ namespace PetCareManagement.Api.Controllers
             }
         }
         [HttpGet("getByPetId/{petId}")]
+        [Authorize]
         public async Task<IActionResult> GetByPetId(int petId)
         {
             try

@@ -1,1 +1,49 @@
-<p>profile works!</p>
+<div class="profile-page">
+	<div class="profile-card" *ngIf="userData as u; else loading">
+		<div class="profile-header">
+			<div class="avatar">{{ (u.name[0] || '?') | uppercase }}</div>
+			<div class="info">
+				<h1 class="name">{{ u.name }}</h1>
+				<p class="email">{{ u.email }}</p>
+				<p class="phone">{{ u.phoneNumber }}</p>
+			</div>
+		</div>
+
+		<div class="profile-meta">
+			<div class="meta-item">
+				<span class="label">User ID</span>
+				<span class="value">#{{ u.userId }}</span>
+			</div>
+			<div class="meta-item">
+				<span class="label">Member Since</span>
+				<span class="value">{{ u.createdAt | date:'mediumDate' }}</span>
+			</div>
+		</div>
+
+		<div class="actions">
+			<button class="btn primary" type="button">Edit Profile</button>
+			<button class="btn outline" type="button">Change Password</button>
+		</div>
+	</div>
+
+	<ng-template #loading>
+		<div class="profile-card skeleton">
+			<div class="profile-header">
+				<div class="avatar shimmer"></div>
+				<div class="info">
+					<div class="line shimmer w-200"></div>
+					<div class="line shimmer w-150"></div>
+					<div class="line shimmer w-120"></div>
+				</div>
+			</div>
+			<div class="profile-meta">
+				<div class="line shimmer w-100"></div>
+				<div class="line shimmer w-120"></div>
+			</div>
+			<div class="actions">
+				<div class="btn shimmer w-120"></div>
+				<div class="btn shimmer w-160"></div>
+			</div>
+		</div>
+	</ng-template>
+</div>

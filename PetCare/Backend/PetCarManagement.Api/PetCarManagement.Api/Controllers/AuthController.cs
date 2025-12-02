@@ -27,7 +27,7 @@ namespace PetCareManagement.Api.Controllers
                     {
                         HttpOnly = true,
                         Secure = true,
-                        SameSite = SameSiteMode.Strict,
+                        SameSite = SameSiteMode.None,
                         Expires = result.RefreshTokenExpiresAt
                     });
 
@@ -68,7 +68,7 @@ namespace PetCareManagement.Api.Controllers
                     {
                         HttpOnly = true,
                         Secure = true,
-                        SameSite = SameSiteMode.Strict,
+                        SameSite = SameSiteMode.None,
                         Expires = result.RefreshTokenExpiresAt
                     });
 
