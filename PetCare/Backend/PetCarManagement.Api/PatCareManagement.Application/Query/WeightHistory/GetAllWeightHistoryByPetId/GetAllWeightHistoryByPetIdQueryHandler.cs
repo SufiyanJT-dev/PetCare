@@ -25,7 +25,7 @@ namespace PetCareManagement.Application.Query.WeightHistory.GetAllWeightHistoryB
             CancellationToken cancellationToken)
         {
             Expression<Func<Domain.Entity.WeightHistory, bool>> predicate = wh => wh.PetId == request.PetId;
-
+          
             var weightHistories = await _repo.FindAsync(predicate);
             var result = weightHistories
                 .OrderByDescending(wh => wh.Date)

@@ -27,8 +27,13 @@ namespace PetCareManagement.Application.Command.WeightHistory.CreateWeightHistor
                  date: request.Date,
                  weightKg: request.WeightKg
              );
+<<<<<<< Updated upstream
             var created = await _repo.AddAsync(weightHistory); 
             await _repo.SaveChangesAsync();                 
+=======
+            var created = await _repo.AddAsync(weightHistory);
+            await _repo.SaveChangesAsync();                  
+>>>>>>> Stashed changes
 
             return new WeightHistoryDto
             {

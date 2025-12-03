@@ -7,15 +7,13 @@ import { ActivatedRoute } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddWeightDialog } from './add-weight-dialog/add-weight-dialog';
-// 1. Import Chart definitions
-import { BaseChartDirective } from 'ng2-charts';
-import { ChartConfiguration, ChartOptions } from 'chart.js';
+
 
 @Component({
   selector: 'app-weighthistory',
   standalone: true,
   // 2. Add BaseChartDirective and DatePipe to imports
-  imports: [CommonModule, FormsModule, MatButtonModule, MatDialogModule, BaseChartDirective],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatDialogModule],
   providers: [DatePipe], // Add DatePipe to providers so we can use it in TS
   templateUrl: './weighthistory.html',
   styleUrls: ['./weighthistory.scss'],
@@ -29,24 +27,7 @@ export class Weighthistory {
   weightHistoryList: IWeightHistory[] = [];
   id: number = 0;
 
-  // 3. Chart Configuration
-  public lineChartData: ChartConfiguration<'line'>['data'] = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-        label: 'Weight (Kg)',
-        fill: true,
-        tension: 0.4, // Makes the line curved
-        borderColor: '#3b82f6', // Blue color (Tailwind blue-500)
-        backgroundColor: 'rgba(59, 130, 246, 0.3)' // Light blue background
-      }
-    ]
-  };
-  public lineChartOptions: ChartOptions<'line'> = {
-    responsive: true,
-    maintainAspectRatio: false, // Allows us to set height in CSS
-  };
+
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -65,13 +46,7 @@ export class Weighthistory {
       new Date(a.date).getTime() - new Date(b.date).getTime()
     );
 
-    this.lineChartData = {
-      labels: sortedData.map(d => this.datePipe.transform(d.date, 'dd/MM')), // Format X-axis
-      datasets: [{
-        ...this.lineChartData.datasets[0],
-        data: sortedData.map(d => d.weightKg)
-      }]
-    };
+   
   }
 
   deleteWeightHistory(whId: number) {
