@@ -21,5 +21,7 @@ export class Api {
   updatePet(petId:number,payload:RequestForAddPet):Observable<any>{
      return this.http.patch(`${this.baseUrl}UpdatePetDetails${petId}`,payload)
   }
- 
+  searchPetByName(petName:string,ownerId:number):Observable<any>{
+    return this.http.get(`${this.baseUrl}search?userId=${ownerId}&name=${petName}`)
+  }
 }

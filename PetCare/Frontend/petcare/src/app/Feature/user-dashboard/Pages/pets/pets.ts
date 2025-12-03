@@ -95,5 +95,33 @@ openDialog(pet?: ResponseForGetById) {
     }
   });
 }
+isSearching = false;
+searchMessage = '';
+searchPet(petNameInput: string) {
+  const petName = petNameInput.trim();
+  this.isSearching = !!petName; // true if input is not empty
+
+  if (petName) {
+    this.apiPets.searchPetByName(petName, this.userId).subscribe({
+      next: (value) => {
+        this.petsDetails.set(value);
+        this.searchMessage = value.length ? '' : 'No pets found with that name.';
+      },
+      error: (err) => {
+        if (err.status === 404) {
+          this.petsDetails.set([]);
+          this.searchMessage = 'No pets found with that name.';
+        } else {
+          this.searchMessage = 'Error while searching. Please try again.';
+        }
+      }
+    });
+  } else {
+    this.ngOnInit();
+    this.isSearching = false;
+    this.searchMessage = '';
+  }
+}
+
 
 }

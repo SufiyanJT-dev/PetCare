@@ -1,6 +1,14 @@
+<div style="display: flex; justify-content: flex-end; padding: 10px;">
+  <input #petNameInput type="text" placeholder="Search Pet Name" style="padding: 6px; margin-right: 6px;">
+  <button type="button" style="padding: 6px 12px;" (click)="searchPet(petNameInput.value)">Search</button>
+</div>
 
-<button mat-raised-button color="primary" (click)="openDialog()">+ Add Pets</button>
+<button mat-raised-button color="primary" (click)="openDialog()" 
+        *ngIf="!isSearching">
+  + Add Pets
+</button>
 
+<p *ngIf="searchMessage" style="color: red; margin-top: 10px;">{{ searchMessage }}</p>
 <div class="pets-container">
 
   <mat-card class="pet-card" *ngFor="let pet of petsDetails()">
