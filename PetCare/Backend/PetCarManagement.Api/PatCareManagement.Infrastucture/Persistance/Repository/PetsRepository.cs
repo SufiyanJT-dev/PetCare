@@ -39,9 +39,10 @@ namespace PetCareManagement.Infrastucture.Persistance.Repository
             return Task.FromResult(false);
         }
 
-        public Task<IEnumerable<Pets>> FindAsync(Expression<Func<Pets, bool>> predicate)
+        public async Task<IEnumerable<Pets>> FindAsync(Expression<Func<Pets, bool>> predicate)
         {
-            throw new NotImplementedException();
+            IEnumerable<Domain.Entity.Pets> pets=await petCareDbContext.Pets.Where(predicate).ToListAsync();
+            return  pets;
         }
 
         public Task<IEnumerable<Pets>> GetAllAsync()

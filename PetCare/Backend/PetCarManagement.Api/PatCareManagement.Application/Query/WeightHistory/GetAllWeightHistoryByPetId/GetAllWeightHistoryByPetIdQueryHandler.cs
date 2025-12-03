@@ -24,13 +24,9 @@ namespace PetCareManagement.Application.Query.WeightHistory.GetAllWeightHistoryB
             GetAllWeightHistoryByPetIdQuery request,
             CancellationToken cancellationToken)
         {
-            // Expression to filter by PetId
             Expression<Func<Domain.Entity.WeightHistory, bool>> predicate = wh => wh.PetId == request.PetId;
 
-            // Get all matching records
             var weightHistories = await _repo.FindAsync(predicate);
-
-            // Sort by Date descending (latest first) and map to DTO
             var result = weightHistories
                 .OrderByDescending(wh => wh.Date)
                 .Select(wh => new WeightHistoryDto

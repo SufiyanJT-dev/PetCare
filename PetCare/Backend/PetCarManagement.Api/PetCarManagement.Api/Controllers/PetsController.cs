@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetCareManagement.Application.Command.Pets.Command.AddPetComand;
 using PetCareManagement.Application.Command.Pets.Command.DeletePetCommand;
 using PetCareManagement.Application.Command.Pets.Command.UpdatePetDeatilsCommand;
+using PetCareManagement.Application.Query.Pets.GetPetByName;
 using PetCareManagement.Application.Query.Pets.GetPetOfUserId;
 
 
@@ -22,7 +23,7 @@ namespace PetCareManagement.Api.Controllers
         }
 
         [HttpPost("AddPet")]
-        [Authorize]
+      
         public async Task<IActionResult> AddPet(AddPetComand command)
         {
             try
@@ -48,8 +49,8 @@ namespace PetCareManagement.Api.Controllers
                 command.PetId = id;
                 return await _mediator.Send(command);
             }
-          
-            catch( FluentValidation.ValidationException ex)
+
+            catch (FluentValidation.ValidationException ex)
             {
                 return BadRequest(new { Errors = ex.Errors.Select(e => e.ErrorMessage) });
             }
@@ -59,12 +60,12 @@ namespace PetCareManagement.Api.Controllers
             }
         }
         [HttpGet("GetPetsByOwnerId{ownerId}")]
-        [Authorize]
+        
         public async Task<IActionResult> GetPetsByOwnerId(int ownerId)
         {
             try
             {
-                var query =new GetPetOfUserIdQuery();
+                var query = new GetPetOfUserIdQuery();
                 query.Id = ownerId;
                 var pets = await _mediator.Send(query);
                 return Ok(pets);
@@ -79,7 +80,7 @@ namespace PetCareManagement.Api.Controllers
             }
         }
         [HttpPatch("UpdatePetDetails{id}")]
-        public async Task<ActionResult<int>> UpdatePetDeatails(int id,UpdatePetCommand command)
+        public async Task<ActionResult<int>> UpdatePetDeatails(int id, UpdatePetCommand command)
         {
             try
             {
@@ -109,7 +110,7 @@ namespace PetCareManagement.Api.Controllers
                 return BadRequest("Pet name is required.");
 
             var query = new GetPetByNameQuery(userId, name);
-            var result = await _mediator.Send(query);
+            var result = await mediator.Send(query);
 
             if (result == null || result.Count == 0)
                 return NotFound("No pets found matching this name.");
