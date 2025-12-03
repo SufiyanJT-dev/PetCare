@@ -10,15 +10,15 @@ namespace PetCareManagement.Application.Command.Pets.Command.UpdatePetDeatilsCom
 {
     public class UpdatePetCommandHandler : IRequestHandler<UpdatePetCommand, int>
     {
-        private readonly IGenericRepo<Domain.Entity.Pets> petRepository;
+        private readonly IGenericRepo<Domain.Entity.Pets> _petRepository;
 
         public UpdatePetCommandHandler(IGenericRepo<Domain.Entity.Pets> petRepository)
         {
-            this.petRepository = petRepository;
+            this._petRepository = petRepository;
         }
         async Task<int> IRequestHandler<UpdatePetCommand, int>.Handle(UpdatePetCommand request, CancellationToken cancellationToken)
         {
-            var existingPet = await petRepository.GetByIdAsync(request.PetId);
+            var existingPet = await _petRepository.GetByIdAsync(request.PetId);
             if (existingPet == null)
             {
                 throw new Exception("Pet not found");
@@ -32,7 +32,7 @@ namespace PetCareManagement.Application.Command.Pets.Command.UpdatePetDeatilsCom
                
             );
 
-            await petRepository.UpdateAsync(existingPet);
+            await _petRepository.UpdateAsync(existingPet);
             return existingPet.PetId;
         }
     }
