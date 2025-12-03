@@ -9,6 +9,6 @@ export class ProfileService {
   http = inject(HttpClient)
 
   getUserProfile(id : number) {
-    return this.http.get<IUserProfile>('https://localhost:7121/api/User/'+id);
+    return this.http.get<IUserProfile>('https://localhost:7121/api/User/GetUserById/'+id);
   }
 }

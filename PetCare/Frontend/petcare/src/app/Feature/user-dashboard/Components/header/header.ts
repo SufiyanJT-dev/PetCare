@@ -23,11 +23,13 @@ export class Header {
   @Output() menuToggled = new EventEmitter<void>();
 
   toggleMenu(): void {
-    console.log('Header clicked');   // ✅ should print when button is pressed
+    console.log('Header clicked');   
     this.menuToggled.emit();
   }
   logout(){
-    
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('refreshToken'); 
+   this.router.navigate(['/login'], { replaceUrl: true });
   }
   goToPRofile(){
     this.router.navigate(['user-dashboard/profile'])
