@@ -14,11 +14,11 @@ namespace PetCareManagement.Api.Controllers
     [ApiController]
     public class PetsController : ControllerBase
     {
-        private readonly IMediator mediator;
+        private readonly IMediator _mediator;
 
         public PetsController(IMediator mediator)
         {
-            this.mediator = mediator;
+            this._mediator = mediator;
         }
 
         [HttpPost("AddPet")]
@@ -27,7 +27,7 @@ namespace PetCareManagement.Api.Controllers
         {
             try
             {
-                int petId = await mediator.Send(command);
+                int petId = await _mediator.Send(command);
                 return Ok(new { PetId = petId });
             }
             catch (FluentValidation.ValidationException ex)
@@ -46,7 +46,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 DeletePetCommand command = new DeletePetCommand();
                 command.PetId = id;
-                return await mediator.Send(command);
+                return await _mediator.Send(command);
             }
           
             catch( FluentValidation.ValidationException ex)
@@ -66,7 +66,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 var query =new GetPetOfUserIdQuery();
                 query.Id = ownerId;
-                var pets = await mediator.Send(query);
+                var pets = await _mediator.Send(query);
                 return Ok(pets);
             }
             catch (FluentValidation.ValidationException ex)
@@ -84,7 +84,7 @@ namespace PetCareManagement.Api.Controllers
             try
             {
                 command.PetId = id;
-                await mediator.Send(command);
+                await _mediator.Send(command);
                 return Ok(new { Message = "Pet details updated successfully." });
             }
             catch (FluentValidation.ValidationException ex)
@@ -97,5 +97,23 @@ namespace PetCareManagement.Api.Controllers
                 return BadRequest(new { Message = ex.Message });
             }
         }
+        [HttpGet("search")]
+        public async Task<IActionResult> SearchPet(
+        [FromQuery] int userId,
+        [FromQuery] string name)
+        {
+            if (userId <= 0)
+                return BadRequest("Invalid user ID.");
+
+            if (string.IsNullOrWhiteSpace(name))
+                return BadRequest("Pet name is required.");
+
+            var query = new GetPetByNameQuery(userId, name);
+            var result = await _mediator.Send(query);
+
+            if (result == null || result.Count == 0)
+                return NotFound("No pets found matching this name.");
+            return Ok(result);
         }
+    }
 }

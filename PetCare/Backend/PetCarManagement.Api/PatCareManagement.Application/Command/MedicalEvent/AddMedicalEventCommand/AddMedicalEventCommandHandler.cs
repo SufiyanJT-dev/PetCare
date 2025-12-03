@@ -13,12 +13,12 @@ namespace PetCareManagement.Application.Command.MedicalEvent.AddMedicalEventComm
     {
         private readonly IGenericRepo<Domain.Entity.MedicalEvent> _medicalEventRepo;
         private readonly IReminderScheduler _scheduler;
-        private readonly IGenericRepo<Domain.Entity.Reminder> _reminderRepo;
+        private readonly IGenericRepo<Reminders> _reminderRepo;
 
         public AddMedicalEventCommandHandler(
             IGenericRepo<Domain.Entity.MedicalEvent> medicalEventRepo,
             IReminderScheduler scheduler,
-            IGenericRepo<Domain.Entity.Reminder> reminderRepo)
+            IGenericRepo<Reminders> reminderRepo)
         {
             _medicalEventRepo = medicalEventRepo;
             _scheduler = scheduler;
