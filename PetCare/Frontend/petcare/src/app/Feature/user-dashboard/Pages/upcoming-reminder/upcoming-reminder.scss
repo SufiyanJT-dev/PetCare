@@ -1,0 +1,146 @@
+/* Style for the dropdown */
+select {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  margin-bottom: 20px;
+  transition: border-color 0.3s ease;
+}
+
+select:focus {
+  border-color: #4CAF50;
+  outline: none;
+  background-color: #fff;
+}
+
+/* Container for each reminder card */
+div[ngFor] {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+div[ngFor]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Paragraph styling inside cards */
+div[ngFor] p {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #333;
+}
+
+/* Highlight labels */
+div[ngFor] p::before {
+  font-weight: 600;
+  color: #555;
+}
+
+/* Specific emphasis for important fields */
+div[ngFor] p:nth-child(1), /* Date */
+div[ngFor] p:nth-child(2) { /* Type */
+  font-weight: 600;
+  color: #4CAF50;
+}
+
+div[ngFor] p:nth-child(6) { /* Pet info */
+  font-style: italic;
+  color: #666;
+}
+/* Global reset for consistency */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Page background */
+body {
+  background-color: #f4f6f9;
+  color: #333;
+  line-height: 1.5;
+  padding: 20px;
+}
+
+/* Dropdown styling */
+select {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  background-color: #fff;
+  margin-bottom: 25px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+select:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 6px rgba(76, 175, 80, 0.4);
+  outline: none;
+}
+
+/* Reminder card container */
+.reminder-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reminder-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+}
+
+/* Reminder text */
+.reminder-card p {
+  margin: 6px 0;
+  font-size: 15px;
+  color: #444;
+}
+
+/* Highlight important fields */
+.reminder-card p:first-child, /* Date */
+.reminder-card p:nth-child(2) { /* Type */
+  font-weight: 600;
+  color: #4CAF50;
+}
+
+.reminder-card p:nth-child(6) { /* Pet info */
+  font-style: italic;
+  color: #666;
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  select {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .reminder-card {
+    padding: 14px;
+  }
+
+  .reminder-card p {
+    font-size: 14px;
+  }
+}

@@ -15,7 +15,7 @@ namespace PatCareManagement.Infrastucture.Persistance.Data
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PetCareDb;User Id=sa;Password=Sufiyan@123;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"Server=localhost;Database=PetCareDb;User Id=sa;Password=12345678Aa;TrustServerCertificate=True;");
 
         }
         public DbSet<User> Users { get; set; }

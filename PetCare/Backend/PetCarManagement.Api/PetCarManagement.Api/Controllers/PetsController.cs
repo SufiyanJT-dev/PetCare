@@ -15,11 +15,11 @@ namespace PetCareManagement.Api.Controllers
     [ApiController]
     public class PetsController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IMediator mediator;
 
         public PetsController(IMediator mediator)
         {
-            this._mediator = mediator;
+            this.mediator = mediator;
         }
 
         [HttpPost("AddPet")]
@@ -28,7 +28,7 @@ namespace PetCareManagement.Api.Controllers
         {
             try
             {
-                int petId = await _mediator.Send(command);
+                int petId = await mediator.Send(command);
                 return Ok(new { PetId = petId });
             }
             catch (FluentValidation.ValidationException ex)
@@ -47,7 +47,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 DeletePetCommand command = new DeletePetCommand();
                 command.PetId = id;
-                return await _mediator.Send(command);
+                return await mediator.Send(command);
             }
 
             catch (FluentValidation.ValidationException ex)
@@ -67,7 +67,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 var query = new GetPetOfUserIdQuery();
                 query.Id = ownerId;
-                var pets = await _mediator.Send(query);
+                var pets = await mediator.Send(query);
                 return Ok(pets);
             }
             catch (FluentValidation.ValidationException ex)
@@ -85,7 +85,7 @@ namespace PetCareManagement.Api.Controllers
             try
             {
                 command.PetId = id;
-                await _mediator.Send(command);
+                await mediator.Send(command);
                 return Ok(new { Message = "Pet details updated successfully." });
             }
             catch (FluentValidation.ValidationException ex)

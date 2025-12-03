@@ -11,15 +11,15 @@ namespace PetCareManagement.Application.Command.Pets.Command.DeletePetCommand
 {
     public class DeletePetCommandHandler : IRequestHandler<DeletePetCommand, ActionResult<bool>>
     {
-        private readonly IGenericRepo<Domain.Entity.Pets> _genericRepo;
+        private readonly IGenericRepo<Domain.Entity.Pets> genericRepo;
 
         public DeletePetCommandHandler(IGenericRepo<Domain.Entity.Pets> genericRepo)
         {
-            this._genericRepo = genericRepo;
+            this.genericRepo = genericRepo;
         }
         public Task<ActionResult<bool>> Handle(DeletePetCommand request, CancellationToken cancellationToken)
         {
-            _genericRepo.DeleteAsync(request.PetId);
+            genericRepo.DeleteAsync(request.PetId);
             return Task.FromResult<ActionResult<bool>>(true);
         }
     }

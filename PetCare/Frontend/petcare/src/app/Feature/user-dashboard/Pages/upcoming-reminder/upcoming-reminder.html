@@ -1,0 +1,6 @@
+<div *ngFor="let r of upcomingRemindersList" class="reminder-card">
+  <p>Date: {{ r.dateTime | date }}</p>
+  <p>PetName:{{r.petName}}</p>
+  <p>Type: {{ r.type }}</p>
+  <p>Notes: {{ r.description }}</p>
+</div>

@@ -11,18 +11,18 @@ namespace PetCareManagement.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
-        private readonly IMediator _mediator;
+        private readonly IMediator mediator;
 
         public UserController(IMediator mediator)
         {
-            this._mediator = mediator;
+            this.mediator = mediator;
         }
         [HttpPost("CreateUser")]
         public async Task<IActionResult> CreateUser(CreateUserCommand command)
         {
             try
             {
-                var userId = await _mediator.Send(command);
+                var userId = await mediator.Send(command);
 
                 return Ok(new
                 {
@@ -46,7 +46,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 GetUserByIdQuery query = new GetUserByIdQuery();
                 query.UserId = userId;
-                UserDtos user = await _mediator.Send(query);
+                UserDtos user = await mediator.Send(query);
 
                 return Ok(user);
             }

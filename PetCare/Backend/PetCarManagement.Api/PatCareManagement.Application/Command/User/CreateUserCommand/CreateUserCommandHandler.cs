@@ -11,11 +11,11 @@ namespace PetCareManagement.Application.Command.User.command
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, int>
     {
-        private readonly IUserRepository<Domain.Entity.User> _userRepository;
+        private readonly IUserRepository<Domain.Entity.User> userRepository;
         private readonly IPasswordHasher<Domain.Entity.User> _passwordHasher;
         public CreateUserCommandHandler(IUserRepository<Domain.Entity.User> userRepository, IPasswordHasher<Domain.Entity.User> passwordHasher)
         {
-            this._userRepository = userRepository;
+            this.userRepository = userRepository;
             _passwordHasher = passwordHasher;
         }
         public async Task<int> Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -28,9 +28,9 @@ namespace PetCareManagement.Application.Command.User.command
             phoneNumber: request.PhoneNumber
             
             );
-            string hashedPassword = _passwordHasher.HashPassword(user, request.Password);
+            var hashedPassword = _passwordHasher.HashPassword(user, request.Password);
             user.SetPasswordHash(hashedPassword);
-            await _userRepository.AddAsync(user);
+            await userRepository.AddAsync(user);
             return  user.UserId;
         }
     }

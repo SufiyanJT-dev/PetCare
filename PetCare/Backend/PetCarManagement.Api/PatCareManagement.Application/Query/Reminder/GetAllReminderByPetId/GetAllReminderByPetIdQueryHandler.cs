@@ -13,16 +13,16 @@ namespace PetCareManagement.Application.Query.Reminder.GetAllReminderByPetId
 {
     public class GetAllReminderByPetIdQueryHandler : IRequestHandler<GetAllReminderByPetIdQuery, IEnumerable<MedicalEvent>>
     {
-        private readonly IGenericRepo<MedicalEvent> _genericRepo;
+        private readonly IGenericRepo<MedicalEvent> genericRepo;
 
         public GetAllReminderByPetIdQueryHandler(IGenericRepo<MedicalEvent> genericRepo)
         {
-            this._genericRepo = genericRepo;
+            this.genericRepo = genericRepo;
         }
         public async Task<IEnumerable<MedicalEvent>> Handle(GetAllReminderByPetIdQuery request, CancellationToken cancellationToken)
         {
             Expression<Func<MedicalEvent, bool>> upcoming = wh => wh.PetId == request.PetId && wh.NextFollowupDate>=DateTime.Now;
-           IEnumerable<MedicalEvent> reminders = await _genericRepo.FindAsync(upcoming);
+           IEnumerable<MedicalEvent> reminders = await genericRepo.FindAsync(upcoming);
             return reminders.OrderBy(r => r.NextFollowupDate);
 
              

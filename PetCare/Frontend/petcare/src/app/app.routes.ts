@@ -10,6 +10,7 @@ import { Reminder } from './Feature/user-dashboard/Pages/pets/component/reminder
 import { AddAttachment } from './Feature/user-dashboard/Pages/pets/component/medical-events/component/add-attachment/add-attachment';
 import { Documents } from './Feature/user-dashboard/Pages/pets/component/documents/documents';
 import { authguardGuard } from './Core/AuthGuard/auth-guard';
+import { UpcomingReminder } from './Feature/user-dashboard/Pages/upcoming-reminder/upcoming-reminder';
 
 export const routes: Routes = [
   { path: 'sign-up', component: SignUp },
@@ -23,7 +24,8 @@ export const routes: Routes = [
      {path:'medical-events/:petId',component:MedicalEvents},
      {path: 'remainder/:petId', component: Reminder},
      {path:'attachment/:Id',component:AddAttachment},
-     {path:'document/:petId',component:Documents}
+     {path:'document/:petId',component:Documents},
+     {path:'upcoming-reminders', component: UpcomingReminder}
     ]},
   
 

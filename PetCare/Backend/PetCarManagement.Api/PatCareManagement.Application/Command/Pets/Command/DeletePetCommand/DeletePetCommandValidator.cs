@@ -10,9 +10,11 @@ namespace PetCareManagement.Application.Command.Pets.Command.DeletePetCommand
 {
     public class DeletePetCommandValidator:AbstractValidator<DeletePetCommand>
     {
+        private readonly IGenericRepo<Domain.Entity.Pets> genericRepo;
 
         public DeletePetCommandValidator(IGenericRepo<Domain.Entity.Pets> genericRepo)
         {
+            this.genericRepo = genericRepo;
             RuleFor(x => x.PetId).MustAsync(async (PetId, CancellationToken) =>
             {
                 var pet = await genericRepo.GetByIdAsync(PetId);

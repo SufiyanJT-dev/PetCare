@@ -22,7 +22,12 @@ export class Layout {
       link: '/user-dashboard/pet-management',
       color: 'rgba(47, 5, 255, 1)',
     },
-   
+   {
+    title: 'Upcoming Reminders',
+      icon: 'notifications',
+      link: '/user-dashboard/upcoming-reminders',
+      color: 'rgba(47, 5, 255, 1)',
+   }
   ];
 
   opened = false;
