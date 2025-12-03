@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { Remainder } from './Services/remainder';
+import { Remainder } from './services/remainder';
 import { ActivatedRoute } from '@angular/router';
-import { ReminderType, ReminderView } from './Type/ResponseForUpcomingEvent';
+import { ReminderType, ReminderView } from './type/response-for-upcoming-event.model';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 

@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { IMedicalEvent } from '../type/medical-events.model';
+import { MatOption, MatSelectModule } from '@angular/material/select';
+import { minDate } from './Custom-validator/minDate';
 
 @Component({
   selector: 'app-add-medical-event-dialog',

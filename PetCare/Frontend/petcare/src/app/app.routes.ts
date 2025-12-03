@@ -22,7 +22,9 @@ export const routes: Routes = [
      {path:'medical-events/:petId',component:MedicalEvents},
      {path: 'remainder/:petId', component: Reminder},
      {path:'attachment/:Id',component:AddAttachment},
-     {path:'document/:petId',component:Documents}
+     {path:'document/:petId',component:Documents},
+  { path: '', redirectTo: 'profile', pathMatch: 'full' },
+  { path: '**', redirectTo: 'profile' },
     ]},
   
 

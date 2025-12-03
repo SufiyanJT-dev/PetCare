@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { Api } from './service/api';
-import { ResponseForGetById } from './Type/ResponseForGetById';
+import { ResponseForGetById } from './type/response.model';
 import { GetIdServices } from '../../../../Shared/Service/get-id-services';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Console } from 'console';
@@ -39,8 +39,7 @@ export class Pets {
   petsDetails = signal<ResponseForGetById[]>([]);
   constructor(private dialog: MatDialog,private route:ActivatedRoute,private apiPets:Api,private getIdServices :GetIdServices,private router:Router) {}
   ngOnInit(){
-   const token = localStorage.getItem('accessToken');
-   console.log(token);
+   
     this.userId = this.getIdServices.getUserID();
     this.apiPets.getAllpetByUserID(this.userId).subscribe({
       next:(value)=>{

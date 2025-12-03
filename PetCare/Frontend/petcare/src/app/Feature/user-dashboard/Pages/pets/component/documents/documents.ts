@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ApiForDocuments } from './Services/api-for-documents';
-import { AttachmentResponse, MedicalEventType } from './Type/Response';
+import { ApiForDocuments } from './services/api-for-documents';
+import { AttachmentResponse, MedicalEventType } from './type/response.model';
 import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({

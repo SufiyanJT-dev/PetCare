@@ -18,39 +18,7 @@ import { CommonModule } from '@angular/common';
     MatButtonModule,
     CommonModule
   ],
-  template: `
-    <h1 mat-dialog-title>{{ isEditMode ? 'Edit Weight' : 'Add New Weight' }}</h1>
-
-    <form [formGroup]="weightForm">
-      <div mat-dialog-content>
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Date</mat-label>
-          <input matInput type="date" formControlName="date">
-          <mat-error *ngIf="weightForm.get('date')?.hasError('required') && weightForm.get('date')?.touched">
-            Date is required
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="full-width">
-          <mat-label>Weight (kg)</mat-label>
-          <input matInput type="number" formControlName="weightKg">
-          <mat-error *ngIf="weightForm.get('weightKg')?.hasError('required') && weightForm.get('weightKg')?.touched">
-            Weight is required
-          </mat-error>
-          <mat-error *ngIf="weightForm.get('weightKg')?.hasError('min') && weightForm.get('weightKg')?.touched">
-            Weight must be greater than 0
-          </mat-error>
-        </mat-form-field>
-      </div>
-
-      <div mat-dialog-actions align="end">
-        <button mat-button (click)="onCancel()">Cancel</button>
-        <button mat-raised-button color="primary" (click)="onSave()" [disabled]="weightForm.invalid">
-          Save
-        </button>
-      </div>
-    </form>
-  `,
+   templateUrl: './add-weight-dialog.html',
   styleUrls: ['./add-weight-dialog.scss'],
 })
 export class AddWeightDialog {

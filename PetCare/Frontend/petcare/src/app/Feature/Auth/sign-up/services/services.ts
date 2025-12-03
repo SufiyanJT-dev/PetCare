@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {Response} from '../type/Response'
+import {Response} from '../type/Response.model'
 import { ISignUp } from '../type/signup';
 
 @Injectable({

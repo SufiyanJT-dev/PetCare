@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { AttachmentService } from './Service/attachment';
+import { AttachmentService } from './service/attachment';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
