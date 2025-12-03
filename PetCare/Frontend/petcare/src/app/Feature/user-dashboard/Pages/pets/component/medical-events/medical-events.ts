@@ -6,6 +6,13 @@ import { IMedicalEvent, IMedicalEventUpdate } from './type/medical-events.model'
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { AddMedicalEventDialog } from './add-medical-event-dialog/add-medical-event-dialog';
+export enum MedicalType {
+  Vaccination = 0,
+  VetVisit = 1,
+  Medication = 2,
+  Surgery = 3,
+  Other = 4
+}
 
 @Component({
   selector: 'app-medical-events',
@@ -16,7 +23,7 @@ import { AddMedicalEventDialog } from './add-medical-event-dialog/add-medical-ev
 })
 export class MedicalEvents {
 httpService = inject(MedicalEventService);
-
+medicalTypes=MedicalType;
 router = inject(Router);
 MedicalEventList: IMedicalEvent[] = [];
 MedicalEventUpate:IMedicalEventUpdate[]=[];

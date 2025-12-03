@@ -6,6 +6,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import { IMedicalEvent } from '../type/medical-events.model';
+import { MatOption, MatSelectModule } from '@angular/material/select';
+import { minDate } from './CustomValidator/minDate';
 
 @Component({
   selector: 'app-add-medical-event-dialog',
@@ -16,7 +18,8 @@ import { IMedicalEvent } from '../type/medical-events.model';
     MatDialogModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatSelectModule
   ],
   templateUrl: './add-medical-event-dialog.html',
   styleUrls: ['./add-medical-event-dialog.scss']
@@ -27,13 +30,20 @@ export class AddMedicalEventDialog {
   private data = inject(MAT_DIALOG_DATA) as IMedicalEvent | null;
 
   isEditMode = false;
+medicalTypes = [
+  { value: 0, label: 'Vaccination' },
+  { value: 1, label: 'Vet Visit' },
+  { value: 2, label: 'Medication' },
+  { value: 3, label: 'Surgery' },
+  { value: 4, label: 'Other' }
+];
 
   eventForm = this.fb.group({
     date: ['', [Validators.required]],
     type: ['', Validators.required], // numeric but stored as string until save
     vetName: ['', Validators.required],
     notes: [''],
-    nextFollowupDate: ['']
+    nextFollowupDate: ['',minDate(new Date())]
   });
 
   constructor() {
