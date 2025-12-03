@@ -16,11 +16,11 @@ namespace PetCareManagement.Api.Controllers
     [ApiController]
     public class MedicalEventController : ControllerBase
     {
-        private readonly IMediator mediator;
+        private readonly IMediator _mediator;
 
         public MedicalEventController(IMediator mediator)
         {
-            this.mediator = mediator;
+            this._mediator = mediator;
         }
         
         [HttpGet]
@@ -30,7 +30,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 GetAllEventQuery query = new GetAllEventQuery();
                  
-                   IEnumerable<Domain.Entity.MedicalEvent> enumerable= await mediator.Send(query);
+                   IEnumerable<Domain.Entity.MedicalEvent> enumerable= await _mediator.Send(query);
                 return Ok(enumerable);
             }
             catch (Exception ex)
@@ -44,7 +44,7 @@ namespace PetCareManagement.Api.Controllers
         {
             try
             {
-                int result = await mediator.Send(command);
+                int result = await _mediator.Send(command);
                 return Ok(new { Message = "Medical event added successfully!" + result });
             }
             catch (FluentValidation.ValidationException ex)
@@ -64,7 +64,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 GetAllEventByPetIdQuery query = new GetAllEventByPetIdQuery();
                 query.PetId = petId;
-                IEnumerable<Domain.Entity.MedicalEvent> result = await mediator.Send(query);
+                IEnumerable<Domain.Entity.MedicalEvent> result = await _mediator.Send(query);
                 return Ok(result);
             }
             catch (FluentValidation.ValidationException ex)
@@ -83,7 +83,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 DeleteMedicalEventCommand Command = new DeleteMedicalEventCommand();
                 Command.EventId = id;
-                bool result = await mediator.Send(Command);
+                bool result = await _mediator.Send(Command);
                 return Ok(result);
             }
             catch (FluentValidation.ValidationException ex)
@@ -101,7 +101,7 @@ namespace PetCareManagement.Api.Controllers
             try
             {
                 command.Id = Id;
-                int result = await mediator.Send(command);
+                int result = await _mediator.Send(command);
                 return Ok(new { Message = "Medical event updated successfully!" + result });
             }
             catch (FluentValidation.ValidationException ex)

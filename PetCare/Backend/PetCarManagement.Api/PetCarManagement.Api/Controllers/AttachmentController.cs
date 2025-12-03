@@ -15,11 +15,11 @@ namespace PetCareManagement.Api.Controllers
     [ApiController]
     public class AttachmentController : ControllerBase
     {
-        private readonly IMediator mediator;
+        private readonly IMediator _mediator;
 
         public AttachmentController(IMediator mediator)
         {
-            this.mediator = mediator;
+            this._mediator = mediator;
         }
         [HttpPost]
         public async Task<IActionResult> GetAttachments([FromForm] CreateAttachmentCommand command)
@@ -27,7 +27,7 @@ namespace PetCareManagement.Api.Controllers
             try
             {
                
-                int result = await  mediator.Send(command);
+                int result = await  _mediator.Send(command);
                 return Ok(new { AttachmentId = result });
 
             }
@@ -47,7 +47,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 DeleteAttachmentCommand command = new DeleteAttachmentCommand();
                 command.AttachmentId = id;
-                await mediator.Send(command);
+                await _mediator.Send(command);
                 return Ok(new { Message = "Attachment deleted successfully." });
             }
             catch (FluentValidation.ValidationException ex)
@@ -77,7 +77,7 @@ namespace PetCareManagement.Api.Controllers
                     FileName = command.FileName
                 };
             
-            int result = await mediator.Send(updateCommand);
+            int result = await _mediator.Send(updateCommand);
                 return Ok(new { AttachmentId = result });
             }
             catch (FluentValidation.ValidationException ex)
@@ -99,7 +99,7 @@ namespace PetCareManagement.Api.Controllers
             try
             {
                 GetAllAttachmentQuery query = new GetAllAttachmentQuery();
-                var result = await mediator.Send(query);
+                var result = await _mediator.Send(query);
                 return Ok(result);
             }
             catch (FluentValidation.ValidationException ex)
@@ -118,7 +118,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 GetAllAttachmentByEventIdQuery query = new GetAllAttachmentByEventIdQuery();
                 query.EventId = Id;
-                var result = await mediator.Send(query);
+                var result = await _mediator.Send(query);
                 return Ok(result);
             }
             catch (FluentValidation.ValidationException ex)
@@ -138,7 +138,7 @@ namespace PetCareManagement.Api.Controllers
                 GetAllAttachmentByPetIdQuery query = new GetAllAttachmentByPetIdQuery();
                 query.PetId = Id;
                  
-                return Ok(await mediator.Send(query));
+                return Ok(await _mediator.Send(query));
             }
             catch (FluentValidation.ValidationException ex)
             {

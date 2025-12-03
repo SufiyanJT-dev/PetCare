@@ -9,12 +9,13 @@ import { MedicalEvents } from './Feature/user-dashboard/Pages/pets/component/med
 import { Reminder } from './Feature/user-dashboard/Pages/pets/component/reminder/reminder';
 import { AddAttachment } from './Feature/user-dashboard/Pages/pets/component/medical-events/component/add-attachment/add-attachment';
 import { Documents } from './Feature/user-dashboard/Pages/pets/component/documents/documents';
+import { authguardGuard } from './Core/AuthGuard/auth-guard';
 
 export const routes: Routes = [
   { path: 'sign-up', component: SignUp },
   { path: 'sign-in', component: SignIn },
   
-  {path: 'user-dashboard',component:UserDashboard,
+  {path: 'user-dashboard',component:UserDashboard,canActivate:[authguardGuard],
     children:[
       {path:'profile',component:Profile},
       {path:'pet-management',component:Pets},

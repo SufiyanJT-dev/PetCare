@@ -8,7 +8,7 @@ namespace PetCareManagement.Infrastucture.Persistance.Repository
 {
     public class ReminderEmailService
     {
-        private readonly PetCareDbContext _db;   // use DbContext directly
+        private readonly PetCareDbContext _db;  
         private readonly IEmailSender _emailSender;
 
         public ReminderEmailService(PetCareDbContext db, IEmailSender emailSender)

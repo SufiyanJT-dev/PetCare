@@ -13,10 +13,10 @@ namespace PetCareManagement.Application.Command.Pets.Command.AddPetComand
 {
     public class AddPetComandHandler : IRequestHandler<AddPetComand, int>
     {
-        private readonly IGenericRepo<Domain.Entity.Pets> genericRepo;
+        private readonly IGenericRepo<Domain.Entity.Pets> _genericRepo;
 
         public AddPetComandHandler(IGenericRepo<Domain.Entity.Pets> genericRepo) {
-            this.genericRepo = genericRepo;
+            this._genericRepo = genericRepo;
         }
         public async Task<int> Handle(AddPetComand request, CancellationToken cancellationToken)
         {
@@ -28,7 +28,7 @@ namespace PetCareManagement.Application.Command.Pets.Command.AddPetComand
                     dateOfBirth: request.DateOfBirth
                    
                 );
-            await genericRepo.AddAsync(pets);
+            await _genericRepo.AddAsync(pets);
             return pets.PetId;
         }
     }

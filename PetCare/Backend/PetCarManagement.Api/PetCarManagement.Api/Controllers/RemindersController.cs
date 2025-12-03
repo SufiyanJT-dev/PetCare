@@ -14,18 +14,18 @@ namespace PetCareManagement.Api.Controllers
     [ApiController]
     public class RemindersController : ControllerBase
     {
-        private readonly IMediator mediator;
+        private readonly IMediator _mediator;
 
         public RemindersController(IMediator mediator)
         {
-            this.mediator = mediator;
+            this._mediator = mediator;
         }
         [HttpPost("CreateReminder")]
         public async Task<IActionResult> CreateReminder(CreateReminderCommand command)
         {
             try
             {
-                int reminderId = await mediator.Send(command);
+                int reminderId = await _mediator.Send(command);
                 return new OkObjectResult(new { ReminderId = reminderId });
             }
             catch (FluentValidation.ValidationException ex)
@@ -44,7 +44,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 DeleteReminderCommand command = new DeleteReminderCommand();
                 command.Id = Id;
-                int reminderId = await mediator.Send(command);
+                int reminderId = await _mediator.Send(command);
                 return Ok(new { Message = "Reminder deleted successfully. " + reminderId });
             }
             catch (FluentValidation.ValidationException ex)
@@ -62,7 +62,7 @@ namespace PetCareManagement.Api.Controllers
             try
             {
                 command.ReminderId = Id;
-                int reminderId = await mediator.Send(command);
+                int reminderId = await _mediator.Send(command);
                 return Ok(new { Message = "Reminder updated successfully. " + reminderId });
             }
             catch (FluentValidation.ValidationException ex)
@@ -81,7 +81,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 GetAllReminderByPetIdQuery query = new GetAllReminderByPetIdQuery();
                 query.PetId = Id;
-                IEnumerable<MedicalEvent> reminders = await mediator.Send(query);
+                IEnumerable<MedicalEvent> reminders = await _mediator.Send(query);
                 return Ok(reminders);
             }
             catch (FluentValidation.ValidationException ex)
@@ -100,7 +100,7 @@ namespace PetCareManagement.Api.Controllers
             {
                 GetAllpreviousReminderByPetIdQuery query = new GetAllpreviousReminderByPetIdQuery();
                 query.PetId = Id;
-                IEnumerable<MedicalEvent> reminders = await mediator.Send(query);
+                IEnumerable<MedicalEvent> reminders = await _mediator.Send(query);
                 return Ok(reminders);
             }
             catch (FluentValidation.ValidationException ex)

@@ -22,13 +22,13 @@ namespace PetCareManagement.Application.Command.WeightHistory.CreateWeightHistor
         }
         public async Task<WeightHistoryDto> Handle(CreateWeightHistoryCommand request, CancellationToken cancellationToken)
         {
-            var weightHistory = new Domain.Entity.WeightHistory(
+            Domain.Entity.WeightHistory weightHistory = new Domain.Entity.WeightHistory(
                  petId: request.PetId,
                  date: request.Date,
                  weightKg: request.WeightKg
              );
-            var created = await _repo.AddAsync(weightHistory); // MUST AWAIT
-            await _repo.SaveChangesAsync();                    // MUST AWAIT
+            var created = await _repo.AddAsync(weightHistory); 
+            await _repo.SaveChangesAsync();                 
 
             return new WeightHistoryDto
             {

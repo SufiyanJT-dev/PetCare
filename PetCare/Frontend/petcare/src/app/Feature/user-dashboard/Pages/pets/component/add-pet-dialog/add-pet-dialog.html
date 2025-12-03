@@ -1,40 +1,63 @@
 <h1 mat-dialog-title>{{ isEditMode ? 'Edit Pet' : 'Add New Pet' }}</h1>
 
-<form [formGroup]="petForm">
+<form [formGroup]="petForm" (ngSubmit)="onSave()">
   <div mat-dialog-content>
-  <mat-form-field appearance="outline" class="full-width">
-  <mat-label>Pet Name</mat-label>
-  <input matInput formControlName="name">
-  <mat-error *ngIf="petForm.get('name')?.hasError('required') && petForm.get('name')?.touched">
 
-  </mat-error>
-</mat-form-field>
+    <!-- Pet Name -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Pet Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter pet name">
+      <mat-error *ngIf="formControls['name'].hasError('required')">
+        Pet name is required
+      </mat-error>
+    </mat-form-field>
 
-<mat-form-field appearance="outline" class="full-width">
-  <mat-label>Species</mat-label>
-  <input matInput formControlName="species">
-  <mat-error *ngIf="petForm.get('species')?.hasError('required') && petForm.get('species')?.touched">
-   
-  </mat-error>
-</mat-form-field>
+    <!-- Species -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Species</mat-label>
+      <mat-select formControlName="species" placeholder="Select species">
+        <mat-option *ngFor="let spec of speciesOptions" [value]="spec.value">
+          {{ spec.label }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="formControls['species'].hasError('required')">
+        Species is required
+      </mat-error>
+    </mat-form-field>
 
-<mat-form-field appearance="outline" class="full-width">
-  <mat-label>Date of Birth</mat-label>
-  <input matInput type="date" formControlName="dob">
-  <mat-error *ngIf="petForm.get('dob')?.hasError('required') && petForm.get('dob')?.touched">
-    
-  </mat-error>
-  <mat-error *ngIf="petForm.get('dob')?.hasError('maxDate') && petForm.get('dob')?.touched">
-  
-  </mat-error>
-</mat-form-field>
+    <!-- Breed -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Breed</mat-label>
+      <input matInput formControlName="breed" placeholder="Enter breed">
+      <mat-error *ngIf="formControls['breed'].hasError('required')">
+        Breed is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Date of Birth -->
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Date of Birth</mat-label>
+      <input matInput type="date" formControlName="dob">
+      <mat-error *ngIf="formControls['dob'].hasError('required')">
+        Date of birth is required
+      </mat-error>
+      <mat-error *ngIf="formControls['dob'].hasError('maxDate')">
+        Date cannot be in the future
+      </mat-error>
+    </mat-form-field>
 
   </div>
 
   <div mat-dialog-actions align="end">
-    <button mat-button (click)="onCancel()">Cancel</button>
-    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="petForm.invalid">
-      Save
+    <button mat-button type="button" (click)="onCancel()" [disabled]="isSubmitting">
+      Cancel
+    </button>
+    <button 
+      mat-raised-button 
+      color="primary" 
+      type="submit"
+      [disabled]="petForm.invalid || isSubmitting">
+      {{ isSubmitting ? 'Saving...' : 'Save' }}
     </button>
   </div>
 </form>
